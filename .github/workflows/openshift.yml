@@ -201,20 +201,3 @@ jobs:
         echo
         echo "Your app can be taken down with: \"oc delete all --selector='${{ env.SELECTOR }}'\""
         # Utilise une image officielle Node.js comme base
-FROM node:18-alpine
-
-# Définit le répertoire de travail dans le conteneur
-WORKDIR /app
-
-# Copie les fichiers du projet dans le conteneur
-COPY . .
-
-# Installe les dépendances
-RUN npm install --production
-
-# Expose le port sur lequel l'application écoute
-EXPOSE 3000
-
-# Commande pour démarrer l'application
-CMD ["npm", "start"]
-
