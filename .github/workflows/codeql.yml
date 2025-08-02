@@ -9,46 +9,42 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: CodeQL
+name: "CodeQL"
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
   schedule:
-    - cron: '0 0 * * 0' # Analyse hebdomadaire
+    - cron: '0 0 * * 0'
 
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+
     permissions:
+      security-events: write
       actions: read
       contents: read
-      security-events: write
 
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - language: javascript-typescript
-            build-mode: none
-          - language: python
-            build-mode: none
+        language: [ 'javascript-typescript' ]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          build-mode: ${{ matrix.build-mode }}
-          queries: +security-extended,security-and-quality
 
-      - name: Run CodeQL analysis
+      - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: /language:${{ matrix.language }}
+          upload: true
+

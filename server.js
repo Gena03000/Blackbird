@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const escape = require('escape-html');
 const app = express();
 const PORT = 3000;
 
@@ -18,23 +19,25 @@ if (fs.existsSync(LOG_PATH)) {
 
 // ?? Route de salutation textile
 app.get('/salutation', (req, res) => {
-  const nom = req.query.nom || 'inconnu';
-  const station = req.query.station || 'non définie';
+  const nomRaw = req.query.nom || 'inconnu';
+  const stationRaw = req.query.station || 'non dï¿½finie';
+  const nom = escape(nomRaw);
+  const station = escape(stationRaw);
   const heure = new Date();
 
-  // ??? Enregistrement mémoire
-  passages.push({ nom, station, heure });
+  // ??? Enregistrement mÃ©moire
+  passages.push({ nom: nomRaw, station: stationRaw, heure });
 
-  // ?? Mise à jour du fichier JSON
+  // ?? Mise Ã  jour du fichier JSON
   fs.writeFile(LOG_PATH, JSON.stringify(passages, null, 2), err => {
-    if (err) console.warn("? Erreur écriture JSON :", err.message);
+    if (err) console.warn("? Erreur Ã©criture JSON :", err.message);
   });
 
   const message = nom.toLowerCase() === 'gena'
-    ? `?? Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} ?`
-    : `?? Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+    ? `?? Bonjour Gena ! Ã€ ${station}, votre foulard numÃ©rique se manifeste Ã  ${heure.toLocaleTimeString()} ?`
+    : `?? Bonjour ${nom}, passage dÃ©tectÃ© Ã  ${station} Ã  ${heure.toLocaleTimeString()}.`;
 
-  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
+  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} Ã  ${station}`);
   res.send(message);
 });
 
@@ -42,14 +45,14 @@ app.get('/salutation', (req, res) => {
 app.get('/passagers', (req, res) => {
   const now = new Date();
 
-  // Passages dans les 10 dernières minutes
+  // Passages dans les 10 derniÃ¨res minutes
   const actifs = passages.filter(p => (now - new Date(p.heure)) < 10 * 60 * 1000);
   const dernier = actifs.at(-1);
 
   const compteur = actifs.length;
   const infoDernier = dernier
-    ? `${dernier.nom} à ${dernier.station} – ${new Date(dernier.heure).toLocaleTimeString()}`
-    : `aucun passage récent`;
+    ? `${escape(dernier.nom)} ï¿½ ${escape(dernier.station)} ï¿½ ${new Date(dernier.heure).toLocaleTimeString()}`
+    : `aucun passage rÃ©cent`;
 
   res.json({
     actifs: compteur,
