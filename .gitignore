@@ -1,0 +1,11 @@
+# Node.js
+node_modules/
+.env
+*.log
+# Python
+venv/
+__pycache__/
+*.pyc
+# OS / Editor
+.DS_Store
+*.swp
