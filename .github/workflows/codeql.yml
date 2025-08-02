@@ -31,7 +31,6 @@ jobs:
     permissions:
       # required for all workflows
       security-events: write
-![CodeQL Scan](https://github.com/Gena03000/Blackbird/actions/workflows/codeql.yml/badge.svg)
 
       # required to fetch internal or private CodeQL packs
       packages: read
