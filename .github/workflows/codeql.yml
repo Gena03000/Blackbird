@@ -59,9 +59,10 @@ jobs:
           echo 'Remplacez ces commandes par celles de votre projet.'
           echo 'Exemple : make bootstrap && make release'
           exit 1  # ← à retirer une fois vos vraies commandes ajoutées
-
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
+with:
+  config-file: .github/codeql/codeql-config.yml
 
