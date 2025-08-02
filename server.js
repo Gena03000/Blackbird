@@ -19,22 +19,22 @@ if (fs.existsSync(LOG_PATH)) {
 // ?? Route de salutation textile
 app.get('/salutation', (req, res) => {
   const nom = req.query.nom || 'inconnu';
-  const station = req.query.station || 'non définie';
+  const station = req.query.station || 'non dÃ©finie';
   const heure = new Date();
 
-  // ??? Enregistrement mémoire
+  // ??? Enregistrement mÃ©moire
   passages.push({ nom, station, heure });
 
-  // ?? Mise à jour du fichier JSON
+  // ?? Mise Ã  jour du fichier JSON
   fs.writeFile(LOG_PATH, JSON.stringify(passages, null, 2), err => {
-    if (err) console.warn("? Erreur écriture JSON :", err.message);
+    if (err) console.warn("? Erreur Ã©criture JSON :", err.message);
   });
 
   const message = nom.toLowerCase() === 'gena'
-    ? `?? Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} ?`
-    : `?? Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+    ? `?? Bonjour Gena ! Ã€ ${station}, votre foulard numÃ©rique se manifeste Ã  ${heure.toLocaleTimeString()} ?`
+    : `?? Bonjour ${nom}, passage dÃ©tectÃ© Ã  ${station} Ã  ${heure.toLocaleTimeString()}.`;
 
-  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
+  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} Ã  ${station}`);
   res.send(message);
 });
 
@@ -42,20 +42,31 @@ app.get('/salutation', (req, res) => {
 app.get('/passagers', (req, res) => {
   const now = new Date();
 
-  // Passages dans les 10 dernières minutes
+  // Passages dans les 10 derniÃ¨res minutes
   const actifs = passages.filter(p => (now - new Date(p.heure)) < 10 * 60 * 1000);
   const dernier = actifs.at(-1);
 
   const compteur = actifs.length;
   const infoDernier = dernier
-    ? `${dernier.nom} à ${dernier.station} – ${new Date(dernier.heure).toLocaleTimeString()}`
-    : `aucun passage récent`;
+    ? `${dernier.nom} Ã  ${dernier.station} â€“ ${new Date(dernier.heure).toLocaleTimeString()}`
+    : `aucun passage rÃ©cent`;
 
   res.json({
     actifs: compteur,
     dernier_passage: infoDernier
   });
 });
+// ðŸŒŸ Route pour afficher une liste fictive de produits
+app.get('/api/produits', (req, res) => {
+  res.json({
+    produits: [
+      { id: 1, nom: 'Foulard numÃ©rique', prix: 29.99 },
+      { id: 2, nom: 'Ã‰charpe sensorielle', prix: 39.50 },
+      { id: 3, nom: 'Cape textile connectÃ©e', prix: 79.00 }
+    ]
+  });
+});
+
 
 // ?? Lancement du serveur
 app.listen(PORT, () => {
