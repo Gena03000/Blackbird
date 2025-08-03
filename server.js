@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const escape = require('escape-html');
 const app = express();
 const PORT = 3000;
 
@@ -18,23 +19,25 @@ if (fs.existsSync(LOG_PATH)) {
 
 // ?? Route de salutation textile
 app.get('/salutation', (req, res) => {
-  const nom = req.query.nom || 'inconnu';
-  const station = req.query.station || 'non définie';
+  const nomRaw = req.query.nom || 'inconnu';
+  const stationRaw = req.query.station || 'non définie';
+  const nom = escape(nomRaw);
+  const station = escape(stationRaw);
   const heure = new Date();
 
   // ??? Enregistrement mémoire
-  passages.push({ nom, station, heure });
+  passages.push({ nom: nomRaw, station: stationRaw, heure });
 
   // ?? Mise à jour du fichier JSON
   fs.writeFile(LOG_PATH, JSON.stringify(passages, null, 2), err => {
     if (err) console.warn("? Erreur écriture JSON :", err.message);
   });
 
-  const message = nom.toLowerCase() === 'gena'
+  const message = nomRaw.toLowerCase() === 'gena'
     ? `?? Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} ?`
     : `?? Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
 
-  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
+  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nomRaw} à ${stationRaw}`);
   res.send(message);
 });
 
