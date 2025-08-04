@@ -36,3 +36,47 @@ jobs:
 
       - name: Analyze
         uses: github/codeql-action/analyze@v3
+name: 🛍️ Sync Shopify Products (Daily at 16h)
+
+on:
+  schedule:
+    - cron: '0 14 * * *' # 14h UTC = 16h Paris
+  workflow_dispatch: # Permet lancement manuel si besoin
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🧠 Run Blackbird sync script
+        run: node index.js # ou autre nom si ton fichier principal est `blackbird.js`
+
+      - name: 📣 Notify Slack on success
+        if: success()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"✅ Blackbird sync terminé avec succès à 16h00."}'
+
+      - name: 🚨 Notify Slack on failure
+        if: failure()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"❌ Échec Blackbird sync à 16h00. Vérifie le workflow GitHub."}'
