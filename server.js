@@ -5,7 +5,27 @@ const fs = require('fs');
 
 const RateLimit = require('express-rate-limit');
 
+```javascript
+
+// Rate limiter for /salutation route: max 10 requests per minute per IP
+
+const salutationLimiter = RateLimit({
+
+  windowMs: 60 * 1000, // 1 minute
+
+  max: 10, // limit each IP to 10 requests per windowMs
+
+  message: "Trop de requêtes de salutation, veuillez patienter une minute."
+
+});
+
+const LOG_PATH = 'passages.json';
+
+let passages = [];
+
 const escape = require('escape-html');
+
+```
 
 ```
 const app = express();
@@ -22,9 +42,19 @@ function escapeHtml(text) {
 }
 
 // 🧵 Route de salutation textile
-app.get('/salutation', (req, res) => {
-  const nomBrut = req.query.nom || 'Inconnu';
-  const stationBrute = req.query.gare || 'non définie';
+app.get('/salutation', salutationLimiter, (req, res) => {
+
+  const nom = req.query.nom || 'Inconnu'; // Utilisation de req.query
+
+  const station = req.query.gare || 'non définie'; // Déclaration correcte avec const
+
+  const heure = new Date();
+
+  // Enregistrement en mémoire
+
+  passages.push({ nom, station, heure });
+
+});
 
   // 🧼 Échappement des entrées utilisateur
   const nom = escapeHtml(nomBrut);
