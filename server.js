@@ -1,5 +1,7 @@
 const express = require('express');
 const fs = require('fs');
+const escape = require('escape-html');
+
 const RateLimit = require('express-rate-limit');
 const app = express();
 const PORT = 3000;
@@ -19,11 +21,34 @@ if (fs.existsSync(LOG_PATH)) {
 
 // 🧵 Route de salutation textile
 app.get('/salutation', (req, res) => {
-  const nom = req.query.nom || 'Inconnu'; // ✅ req.query au lieu de req.requête
-  const station = req.query.gare || 'non définie'; // ✅ Déclaration correcte avec const
+25
+
+  const nomRaw = req.query.nom || 'inconnu';
+
+26
+
+  const stationRaw = req.query.station || 'non définie';
+
+27
+
+  const nom = escape(nomRaw);
+
+28
+
+  const station = escape(stationRaw);
+
+29
+
   const heure = new Date();
 
-  // 📝 Enregistrement mémoire
+30
+
+31
+
+  // Enregistrement mémoire
+
+32
+
   passages.push({ nom, station, heure });
 
   // 📁 Mise à jour du fichier JSON
@@ -31,13 +56,15 @@ app.get('/salutation', (req, res) => {
     if (err) console.warn("⚠️ Erreur écriture JSON :", err.message); // ✅ err.message (minuscule)
   });
 
-  // 💬 Message personnalisé
-  const message = nom.toLowerCase() === 'gena'
+const message = nom.toLowerCase() === 'gena'
+
     ? `👋 Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} 🧣`
+
     : `👋 Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
 
-  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
-  res.send(message); // ✅ res (pas rés)
+console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
+
+res.send(message);
 });
 
 
