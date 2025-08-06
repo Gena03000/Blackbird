@@ -27,7 +27,6 @@
 # This is a starter workflow to help you get started with EthicalCheck Actions
 name: Run EthicalCheck API Scan
 
-# Déclencheurs
 on:
   push:
     branches: [ "main", "dev" ]
@@ -35,15 +34,16 @@ on:
     branches: [ "main", "dev" ]
   workflow_dispatch:
 
-# Permissions nécessaires pour publier des résultats SARIF
 permissions:
   security-events: write
   actions: read
-notes_deploiement: |
-  Ligne 1 : Déploiement terminé
-  Ligne 2 : Statut : Succès
 
+# notes_deploiement: |
+#   Ligne 1 : Déploiement terminé
+#   Ligne 2 : Statut : Succès
 
+jobs:
+  ethicalcheck:
     name: EthicalCheck – Analyse API et upload SARIF
     runs-on: ubuntu-latest
 
@@ -54,17 +54,14 @@ notes_deploiement: |
       - name: Run EthicalCheck Scan
         uses: apisec-inc/ethicalcheck-action@v1
         with:
-          # URL de votre spec OpenAPI
           oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
-          # Votre identifiant/email API
           email: "xxx@apisec.ai"
-          # Nom du fichier de résultat SARIF
           sarif-result-file: "ethicalcheck-results.sarif"
 
       - name: Upload SARIF Results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ethicalcheck-results.sarif
+          sarif_file: "ethicalcheck-results.sarif"
 
 
 
