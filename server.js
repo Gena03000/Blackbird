@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const RateLimit = require('express-rate-limit');
 const app = express();
 const PORT = 3000;
 
@@ -17,7 +18,14 @@ if (fs.existsSync(LOG_PATH)) {
 }
 
 // ?? Route de salutation textile
-app.get('/salutation', (req, res) => {
+// Rate limiter: max 10 requests per minute per IP for /salutation
+const salutationLimiter = RateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // limit each IP to 10 requests per windowMs
+  message: "Trop de requêtes, veuillez réessayer plus tard."
+});
+
+app.get('/salutation', salutationLimiter, (req, res) => {
   const nom = req.query.nom || 'inconnu';
   const station = req.query.station || 'non définie';
   const heure = new Date();
