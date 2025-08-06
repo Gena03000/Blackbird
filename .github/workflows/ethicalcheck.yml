@@ -35,13 +35,12 @@ on:
     branches: [ "main", "dev" ]
   workflow_dispatch:
 
-# Permissions requises pour publier des résultats SARIF
+# Permissions nécessaires pour publier des résultats SARIF
 permissions:
   security-events: write
   actions: read
 
 Exécuter l’analyse de l’API EthicalCheck | ✅ Succès | principal | 5e23669 | Gena03000 | 9 secondes |
-[![Run EthicalCheck API Scan](https://github.com/Gena03000/Blackbird/actions/workflows/ethicalcheck.yml/badge.svg)](https://github.com/Gena03000/Blackbird/actions/workflows/ethicalcheck.yml)
   ethicalcheck:
     name: EthicalCheck – Analyse API et upload SARIF
     runs-on: ubuntu-latest
