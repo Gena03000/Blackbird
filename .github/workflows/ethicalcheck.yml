@@ -62,6 +62,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "ethicalcheck-results.sarif"
-
+uses: apisec-inc/ethicalcheck-action@<latest-release>
 
 
