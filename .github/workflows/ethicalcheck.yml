@@ -50,12 +50,12 @@ jobs:
       - name: Checkout du code
         uses: actions/checkout@v3
 
-     - name: Lancer l’analyse EthicalCheck
-  uses: apisec-inc/ethicalcheck-action@<vX.Y.Z>
-  with:
-    oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
-    email:    "xxx@apisec.ai"
-    sarif-result-file: "ethicalcheck-results.sarif"
+     uses: apisec-inc/ethicalcheck-action@vX.Y.Z
+with:
+  api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
+  scan-level: full
+  fail-on-violation: true
+
 
 
       - name: Upload des résultats SARIF vers GitHub
