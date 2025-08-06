@@ -18,9 +18,14 @@
     "express-rate-limit": "^8.0.1",
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
+    "vite": "^6.3.5",
     "winston": "^3.17.0",
-    "xss-clean": "^0.1.4"
+    "xss-clean": "^0.1.4",
+    "escape-html": "^1.0.3"
   },
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
+search/index.json linguist-generated=true

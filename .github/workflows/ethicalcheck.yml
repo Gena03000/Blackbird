@@ -28,6 +28,15 @@
 
 - name: EthicalCheck
   uses: apisec-inc/ethicalcheck-action@v1
+with:
+  api_spec_url: https://yourdomain.com/openapi.yaml
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+
 
 # Controls when the workflow will run
 on:
