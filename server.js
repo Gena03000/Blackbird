@@ -41,7 +41,7 @@ app.get('/salutation', (req, res) => {
 });
 
 
-});
+// Remove line 44 entirely
 
 // ?? Route pour le compteur de passagers actifs
 app.get('/passagers', (req, res) => {
