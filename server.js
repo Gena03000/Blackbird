@@ -17,33 +17,30 @@ if (fs.existsSync(LOG_PATH)) {
   }
 }
 
-// ?? Route de salutation textile
-// Rate limiter: max 10 requests per minute per IP for /salutation
-const salutationLimiter = RateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 10, // limit each IP to 10 requests per windowMs
-  message: "Trop de requêtes, veuillez réessayer plus tard."
-});
-
-app.get('/salutation', salutationLimiter, (req, res) => {
-  const nom = req.query.nom || 'inconnu';
-  const station = req.query.station || 'non définie';
+// 🧵 Route de salutation textile
+app.get('/salutation', (req, res) => {
+  const nom = req.query.nom || 'Inconnu'; // ✅ req.query au lieu de req.requête
+  const station = req.query.gare || 'non définie'; // ✅ Déclaration correcte avec const
   const heure = new Date();
 
-  // ??? Enregistrement mémoire
+  // 📝 Enregistrement mémoire
   passages.push({ nom, station, heure });
 
-  // ?? Mise à jour du fichier JSON
+  // 📁 Mise à jour du fichier JSON
   fs.writeFile(LOG_PATH, JSON.stringify(passages, null, 2), err => {
-    if (err) console.warn("? Erreur écriture JSON :", err.message);
+    if (err) console.warn("⚠️ Erreur écriture JSON :", err.message); // ✅ err.message (minuscule)
   });
 
+  // 💬 Message personnalisé
   const message = nom.toLowerCase() === 'gena'
-    ? `?? Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} ?`
-    : `?? Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+    ? `👋 Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} 🧣`
+    : `👋 Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
 
   console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
-  res.send(message);
+  res.send(message); // ✅ res (pas rés)
+});
+
+
 });
 
 // ?? Route pour le compteur de passagers actifs
