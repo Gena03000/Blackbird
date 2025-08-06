@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const RateLimit = require('express-rate-limit');
+const escape = require('escape-html');
 const app = express();
 const PORT = 3000;
 
@@ -32,9 +33,11 @@ app.get('/salutation', (req, res) => {
   });
 
   // 💬 Message personnalisé
+  const safeNom = escape(nom);
+  const safeStation = escape(station);
   const message = nom.toLowerCase() === 'gena'
-    ? `👋 Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} 🧣`
-    : `👋 Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+    ? `👋 Bonjour Gena ! À ${safeStation}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} 🧣`
+    : `👋 Bonjour ${safeNom}, passage détecté à ${safeStation} à ${heure.toLocaleTimeString()}.`;
 
   console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
   res.send(message); // ✅ res (pas rés)
