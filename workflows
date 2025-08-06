@@ -47,25 +47,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
 
-    env:
-      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
-      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-    steps:
-      - name: ⬇️ Checkout code
-        uses: actions/checkout@v3
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🧠 Run Blackbird sync script
-        run: node index.js # ou autre nom si ton fichier principal est `blackbird.js`
+  
 
       - name: 📣 Notify Slack on success
         if: success()
