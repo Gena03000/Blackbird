@@ -50,11 +50,13 @@ jobs:
       - name: Checkout du code
         uses: actions/checkout@v3
 
-     uses: apisec-inc/ethicalcheck-action@vX.Y.Z
-with:
-  api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
-  scan-level: full
-  fail-on-violation: true
+      - name: Run EthicalCheck Scan
+        uses: apisec-inc/ethicalcheck-action@vX.Y.Z
+        with:
+          api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
+          scan-level: full
+          fail-on-violation: true
+
 
 
 
