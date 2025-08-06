@@ -23,24 +23,23 @@
 # EthicalCheck generates security test report that includes all the tested endpoints, coverage graph, exceptions, and vulnerabilities.
 # Vulnerabilities are fully triaged, it contains CVSS score, severity, endpoint information, and OWASP tagging.
 
-
-# This is a starter workflow to help you get started with EthicalCheck Actions
+# Workflow GitHub Actions pour lancer une analyse API avec EthicalCheck
 name: Run EthicalCheck API Scan
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches:
+      - main
+      - dev
   pull_request:
-    branches: [ "main", "dev" ]
+    branches:
+      - main
+      - dev
   workflow_dispatch:
 
 permissions:
   security-events: write
   actions: read
-
-# notes_deploiement: |
-#   Ligne 1 : Déploiement terminé
-#   Ligne 2 : Statut : Succès
 
 jobs:
   ethicalcheck:
@@ -48,20 +47,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout du code
         uses: actions/checkout@v3
 
-      - name: Run EthicalCheck Scan
+      - name: Lancer l’analyse EthicalCheck
         uses: apisec-inc/ethicalcheck-action@v1
         with:
           oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
           email: "xxx@apisec.ai"
           sarif-result-file: "ethicalcheck-results.sarif"
 
-      - name: Upload SARIF Results to GitHub
+      - name: Upload des résultats SARIF vers GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "ethicalcheck-results.sarif"
-apisec-inc/ethicalcheck-action@<latest-release>
 
 
