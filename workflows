@@ -28,7 +28,7 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-
+uses: apisec-inc/ethicalcheck-action@<latest-release>
 
 
 on:
