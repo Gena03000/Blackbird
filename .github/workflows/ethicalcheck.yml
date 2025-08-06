@@ -26,6 +26,8 @@
 
 # This is a starter workflow to help you get started with EthicalCheck Actions
 
+
+          sarif_file: ethicalcheck-results.sarif
 name: Run EthicalCheck API Scan
 
 on:
@@ -43,14 +45,17 @@ jobs:
       actions: read
 
     steps:
-      - name: Run EthicalCheck
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run EthicalCheck Scan
         uses: apisec-inc/ethicalcheck-action@v1
         with:
           oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
           email: "xxx@apisec.ai"
           sarif-result-file: "ethicalcheck-results.sarif"
 
-      - name: Upload SARIF to GitHub
+      - name: Upload SARIF Results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ethicalcheck-results.sarif
