@@ -1,6 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const escape = require('escape-html');
+
+const RateLimit = require('express-rate-limit');
 const app = express();
 const PORT = 3000;
 
@@ -17,29 +19,56 @@ if (fs.existsSync(LOG_PATH)) {
   }
 }
 
-// ?? Route de salutation textile
+// 🧵 Route de salutation textile
 app.get('/salutation', (req, res) => {
+25
+
   const nomRaw = req.query.nom || 'inconnu';
+
+26
+
   const stationRaw = req.query.station || 'non définie';
+
+27
+
   const nom = escape(nomRaw);
+
+28
+
   const station = escape(stationRaw);
+
+29
+
   const heure = new Date();
 
-  // ??? Enregistrement mémoire
-  passages.push({ nom: nomRaw, station: stationRaw, heure });
+30
 
-  // ?? Mise à jour du fichier JSON
+31
+
+  // Enregistrement mémoire
+
+32
+
+  passages.push({ nom, station, heure });
+
+  // 📁 Mise à jour du fichier JSON
   fs.writeFile(LOG_PATH, JSON.stringify(passages, null, 2), err => {
-    if (err) console.warn("? Erreur écriture JSON :", err.message);
+    if (err) console.warn("⚠️ Erreur écriture JSON :", err.message); // ✅ err.message (minuscule)
   });
 
-  const message = nomRaw.toLowerCase() === 'gena'
-    ? `?? Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} ?`
-    : `?? Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+const message = nom.toLowerCase() === 'gena'
 
-  console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nomRaw} à ${stationRaw}`);
-  res.send(message);
+    ? `👋 Bonjour Gena ! À ${station}, votre foulard numérique se manifeste à ${heure.toLocaleTimeString()} 🧣`
+
+    : `👋 Bonjour ${nom}, passage détecté à ${station} à ${heure.toLocaleTimeString()}.`;
+
+console.log(`[${heure.toLocaleTimeString()}] Salutation textile : ${nom} à ${station}`);
+
+res.send(message);
 });
+
+
+// Remove line 44 entirely
 
 // ?? Route pour le compteur de passagers actifs
 app.get('/passagers', (req, res) => {

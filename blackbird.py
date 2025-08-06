@@ -9,7 +9,7 @@ def scan_repository(repo_path):
             if file.endswith(".py"):
                 full_path = os.path.join(root, file)
                 print(f"→ {full_path}")
-oc whoami -t
+python -m py_compile Blackbird/blackbird.py
 
 
 
