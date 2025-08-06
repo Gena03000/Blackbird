@@ -126,4 +126,14 @@ jobs:
           curl -X POST $SLACK_WEBHOOK_URL \
           -H 'Content-type: application/json' \
           --data '{"text":"❌ Échec optimisation Alt images à 16h00. À vérifier."}'
+- name: Analyse sécurité Python avec Bandit
+  run: |
+    pip install bandit
+    bandit -r Merle/ -f sarif -o blackbird-python-results.sarif
+- name: Upload résultats Python SARIF
+  uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: blackbird-python-results.sarif
+
+
 
