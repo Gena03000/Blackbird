@@ -1,5 +1,5 @@
+name: EthicalCheck – Analyse API et création produit
 
-- name: 🔍 Run EthicalCheck via curl
   run: |
     curl -X POST https://api.ethicalcheck.io/scan \
       -H "Authorization: Bearer ${{ secrets.ETHICALCHECK_API_KEY }}" \
