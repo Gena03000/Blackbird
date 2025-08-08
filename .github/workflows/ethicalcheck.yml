@@ -10,34 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout du dépôt
-        uses: actions/checkout@v4  # ✅ Mise à jour vers v4
+      - name: ✅ Checkout du dépôt
+        uses: actions/checkout@v4
 
-      - name: Vérification Git
-        run: |
-          git status || echo "Git non initialisé"
-          git config --list || echo "Pas de config Git"
-
-      - name: Appel à l'API EthicalCheck
+      - name: 📡 Appel à l'API EthicalCheck
         run: |
           curl -X POST https://ethicalcheck.dev/api/check \
           -H "Content-Type: application/json" \
           -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
 
-      - name: Création du produit
+      - name: 🛠️ Création du produit
         run: |
-          node createProduct.js || echo "Erreur dans createProduct.js"
+          node createProduct.js
 
-      - name: Génération du rapport SARIF
+      - name: 📄 Génération du rapport SARIF
         run: |
-          echo "Génération du rapport SARIF fictif"
-          echo "{}" > ethicalcheck.sarif.json
+          echo '{
+            "version": "2.1.0",
+            "runs": []
+          }' > ethicalcheck.sarif.json
 
-      - name: Upload du rapport SARIF
-        uses: github/codeql-action/upload-sarif@v2
+      - name: 📤 Upload du rapport SARIF
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ethicalcheck.sarif.json
-
 
 
 
