@@ -8,6 +8,10 @@ on:
 jobs:
   ethicalcheck:
     runs-on: ubuntu-latest
+- name: Vérification Git
+  run: |
+    git status || echo "Git non initialisé"
+    git config --list || echo "Pas de config Git"
 
     steps:
       - name: ✅ Checkout du dépôt
