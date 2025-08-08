@@ -1,9 +1,24 @@
+
 - name: 🔍 Run EthicalCheck via curl
   run: |
     curl -X POST https://api.ethicalcheck.io/scan \
       -H "Authorization: Bearer ${{ secrets.ETHICALCHECK_API_KEY }}" \
       -d @openapi.yaml
 
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   ethicalcheck:
@@ -28,6 +43,7 @@ jobs:
 
       - name: 🧪 Create Shopify Product
         run: node createProduct.js
+
 
 
 
