@@ -1,29 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# EthicalCheck addresses the critical need to continuously security test APIs in development and in production.
-
-# EthicalCheck provides the industry’s only free & automated API security testing service that uncovers security vulnerabilities using OWASP API list.
-# Developers relies on EthicalCheck to evaluate every update and release, ensuring that no APIs go to production with exploitable vulnerabilities.
-
-# You develop the application and API, we bring complete and continuous security testing to you, accelerating development.
-
-# Know your API and Applications are secure with EthicalCheck – our free & automated API security testing service.
-
-# How EthicalCheck works?
-# EthicalCheck functions in the following simple steps.
-# 1. Security Testing.
-# Provide your OpenAPI specification or start with a public Postman collection URL.
-# EthicalCheck instantly instrospects your API and creates a map of API endpoints for security testing.
-# It then automatically creates hundreds of security tests that are non-intrusive to comprehensively and completely test for authentication, authorizations, and OWASP bugs your API. The tests addresses the OWASP API Security categories including OAuth 2.0, JWT, Rate Limit etc.
-
-# 2. Reporting.
-# EthicalCheck generates security test report that includes all the tested endpoints, coverage graph, exceptions, and vulnerabilities.
-# Vulnerabilities are fully triaged, it contains CVSS score, severity, endpoint information, and OWASP tagging.
-
-# Workflow GitHub Actions pour lancer une analyse API avec EthicalCheck
 name: Run EthicalCheck API Scan
 
 on:
@@ -47,24 +21,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout du code
+      - name: 📥 Checkout du code
         uses: actions/checkout@v3
 
-      - name: Run EthicalCheck Scan
+      - name: 🔍 Run EthicalCheck Scan
         uses: apisec-inc/ethicalcheck-action@vX.Y.Z
         with:
           api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
           scan-level: full
           fail-on-violation: true
 
-
-
-
-      - name: Upload des résultats SARIF vers GitHub
+      - name: 📤 Upload des résultats SARIF vers GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "ethicalcheck-results.sarif"
-       - name: 🧪 Create Shopify Product
-          run: node createProduct.js
+
+      - name: 🧪 Create Shopify Product
+        run: node createProduct.js
+
 
 
