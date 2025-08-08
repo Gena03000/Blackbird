@@ -4,23 +4,6 @@ on:
   push:
     branches:
       - main
-
-permissions:
-  contents: read
-  security-events: write
-
-jobs:
-  scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-
-on:
-  push:
-    branches:
-      - main
       - dev
   pull_request:
     branches:
@@ -55,6 +38,7 @@ jobs:
 
       - name: 🧪 Create Shopify Product
         run: node createProduct.js
+
 
 
 
