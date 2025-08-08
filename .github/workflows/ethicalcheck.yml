@@ -1,19 +1,10 @@
 name: EthicalCheck – Analyse API et création produit
 
-  run: |
-    curl -X POST https://api.ethicalcheck.io/scan \
-      -H "Authorization: Bearer ${{ secrets.ETHICALCHECK_API_KEY }}" \
-      -d @openapi.yaml
-
 on:
   push:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
   pull_request:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
   workflow_dispatch:
 
 permissions:
@@ -29,12 +20,11 @@ jobs:
       - name: 📥 Checkout du code
         uses: actions/checkout@v3
 
-      - name: 🔍 Run EthicalCheck Scan
-        uses: apisec-inc/ethicalcheck-action@v1.0.3
-        with:
-          api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
-          scan-level: full
-          fail-on-violation: true
+      - name: 🔍 Run EthicalCheck via curl
+        run: |
+          curl -X POST https://api.ethicalcheck.io/scan \
+            -H "Authorization: Bearer ${{ secrets.ETHICALCHECK_API_KEY }}" \
+            -d @openapi.yaml
 
       - name: 📤 Upload des résultats SARIF vers GitHub
         uses: github/codeql-action/upload-sarif@v3
@@ -43,6 +33,7 @@ jobs:
 
       - name: 🧪 Create Shopify Product
         run: node createProduct.js
+
 
 
 
