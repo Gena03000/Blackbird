@@ -27,7 +27,7 @@ jobs:
             -d @openapi.yaml
 
       - name: 📤 Upload des résultats SARIF vers GitHub
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ethicalcheck-results.sarif
 
