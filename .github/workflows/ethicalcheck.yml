@@ -12,12 +12,12 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: read
   security-events: write
-  actions: read
 
 jobs:
   ethicalcheck:
-    name: EthicalCheck – Analyse API et upload SARIF
+    name: EthicalCheck – Analyse API et création produit
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: 🔍 Run EthicalCheck Scan
-        uses: apisec-inc/ethicalcheck-action@vX.Y.Z
+        uses: apisec-inc/ethicalcheck-action@v1.0.3
         with:
           api-key: ${{ secrets.ETHICALCHECK_API_KEY }}
           scan-level: full
@@ -34,7 +34,7 @@ jobs:
       - name: 📤 Upload des résultats SARIF vers GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "ethicalcheck-results.sarif"
+          sarif_file: ethicalcheck-results.sarif
 
       - name: 🧪 Create Shopify Product
         run: node createProduct.js
