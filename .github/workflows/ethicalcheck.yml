@@ -1,9 +1,21 @@
-- name: 🔍 Scan GitHub Actions avec Zizmor
-  run: |
-    curl -sSf https://raw.githubusercontent.com/zizmor/zizmor/main/install.sh | sh
-    zizmor .github/workflows
+name: EthicalCheck Scan
 
-name: Run EthicalCheck API Scan
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
 
 on:
   push:
