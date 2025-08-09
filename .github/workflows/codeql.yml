@@ -28,8 +28,6 @@ jobs:
             build-mode: none
           - language: python
             build-mode: none
-- name: Extend PATH for Node.js
-  run: echo "PATH=${{ runner.tool_cache }}/node/18.x/bin:${{ env.PATH }}" >> $GITHUB_ENV
 
     steps:
       - name: Checkout repository
@@ -41,6 +39,9 @@ jobs:
           node-version: 18.x
           cache: npm
           registry-url: https://registry.npmjs.org
+
+      - name: Extend PATH for Node.js
+        run: echo "PATH=${{ runner.tool_cache }}/node/18.x/bin:${{ env.PATH }}" >> $GITHUB_ENV
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
