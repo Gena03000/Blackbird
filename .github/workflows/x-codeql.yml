@@ -57,11 +57,11 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    ...
+  
   
   sync:
     runs-on: ubuntu-latest
-    ...
+  
   products:
     name: ✨ Sync Products
     runs-on: ubuntu-latest
