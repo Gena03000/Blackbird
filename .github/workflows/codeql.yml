@@ -28,6 +28,8 @@ jobs:
             build-mode: none
           - language: python
             build-mode: none
+- name: Extend PATH for Node.js
+  run: echo "PATH=${{ runner.tool_cache }}/node/18.x/bin:${{ env.PATH }}" >> $GITHUB_ENV
 
     steps:
       - name: Checkout repository
