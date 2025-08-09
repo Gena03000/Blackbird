@@ -48,7 +48,7 @@ jobs:
           build-mode: ${{ matrix.build-mode }}
 
 
-    - name: Run CodeQL analysis
+- name: Run CodeQL analysis
   uses: github/codeql-action/analyze@v3
   with:
     category: /language:${{ matrix.language }}
@@ -57,6 +57,7 @@ jobs:
   uses: actions/setup-node@v3.9.1
   with:
     node-version: 18.x
+
 
     always-auth: # optional, default is false
     # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
