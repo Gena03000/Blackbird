@@ -70,6 +70,8 @@ jobs:
   uses: actions/setup-python@v4
   with:
     python-version: '3.11'
+- name: Upload SARIF results
+  uses: github/codeql-action/upload-sarif@v3
 
 - name: Install Bandit
   run: pip install bandit
