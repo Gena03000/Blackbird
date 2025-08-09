@@ -3,7 +3,7 @@
 
 jobs:
   publish-npm:
-    runs-on: ubuntu-latest
+    runs-: ubuntu-latest
 
     permissions:
       contents: read
