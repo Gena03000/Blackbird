@@ -9,16 +9,6 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-- name: Setup Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: '3.11'
-
-- name: Setup Node.js
-  uses: actions/setup-node@v4
-  with:
-    node-version: '18'
-
 name: "CodeQL Advanced"
 
 on:
