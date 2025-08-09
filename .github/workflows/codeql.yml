@@ -6,17 +6,17 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0'  # Scan hebdomadaire le dimanche à minuit
 
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+
     permissions:
       actions: read
       contents: read
       security-events: write
-      
 
     strategy:
       fail-fast: false
@@ -37,10 +37,22 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
 
+      # Si ton projet nécessite une compilation, active cette étape :
+      # - name: Autobuild
+      #   uses: github/codeql-action/autobuild@v1
+
       - name: Run CodeQL analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: /language:${{ matrix.language }}
+
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ matrix.language }}-results.sarif
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
 
 
 
