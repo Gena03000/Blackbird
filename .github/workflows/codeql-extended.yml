@@ -36,7 +36,7 @@ jobs:
 
       - name: Analyze
         uses: github/codeql-action/analyze@v3
-                    - name: stackql-deploy
+                    
   # You may pin to the exact commit or the version.
   # uses: stackql/stackql-deploy-action@d901f6ccfa4b21de69d35f42032287d26ace01d5
   uses: stackql/stackql-deploy-action@v1.0.2
