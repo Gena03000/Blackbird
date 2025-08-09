@@ -66,6 +66,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
+- name: Setup Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: '3.11'
+
+- name: Install Bandit
+  run: pip install bandit
+
+- name: Run Bandit analysis
+  run: bandit -r Merle/ -f sarif -o blackbird-python-results.sarif
+
+- name: Upload résultats Python SARIF
+  uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: blackbird-python-results.sarif
 
   # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
