@@ -41,11 +41,5 @@ jobs:
         with:
           category: /language:${{ matrix.language }}
 
-      - name: Upload SARIF results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ matrix.language }}-results.sarif
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
