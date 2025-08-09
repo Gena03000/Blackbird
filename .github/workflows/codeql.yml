@@ -29,6 +29,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
 - name: Setup Node.js
   uses: actions/setup-node@v4
   with:
@@ -37,11 +38,10 @@ jobs:
 - name: Install dependencies
   run: npm install
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: ${{ matrix.language }}
-          build-mode: ${{ matrix.build-mode }}
+     - name: Build project manually
+  if: matrix.language == 'javascript-typescript' && matrix.build-mode == 'manual'
+  run: npm run build
+
 
       # Si ton projet nécessite une compilation, active cette étape :
       # - name: Autobuild
@@ -60,6 +60,8 @@ jobs:
           sarif_file: ${{ matrix.language }}-results.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+
 ✅ Corrige le workflow CodeQL Basic
 
 
