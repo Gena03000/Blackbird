@@ -8,29 +8,26 @@ on:
 jobs:
   ethicalcheck:
     runs-on: ubuntu-latest
-steps:
-  - name: Vérification Git
-    run: |
-      git status || echo "Git non initialisé"
-      git config --list || echo "Pas de config Git"
-  - name: ✅ Checkout du dépôt
-    uses: actions/checkout@v4
+    steps:
+      - name: Vérification Git
+        run: |
+          git status || echo "Git non initialisé"
+          git config --list || echo "Pas de config Git"
 
+      - name: ✅ Checkout du dépôt
+        uses: actions/checkout@v4
 
-   - name: 📡 Appel à l'API EthicalCheck
-  run: |
-    curl -X POST https://ethicalcheck.dev/api/check \
-    -H "Content-Type: application/json" \
-    -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
+      - name: 📡 Appel à l'API EthicalCheck
+        run: |
+          curl -X POST https://ethicalcheck.dev/api/check \
+          -H "Content-Type: application/json" \
+          -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
 
-
-- name: Installer les dépendances
-  run: npm install
-
+      - name: Installer les dépendances
+        run: npm install
 
       - name: 🛠️ Création du produit
-        run: |
-          node createProduct.js
+        run: node createProduct.js
 
       - name: 📄 Génération du rapport SARIF
         run: |
@@ -43,6 +40,7 @@ steps:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ethicalcheck.sarif.json
+
 
 
 
