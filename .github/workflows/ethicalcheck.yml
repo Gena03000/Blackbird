@@ -18,12 +18,14 @@ steps:
 
 
       - name: 📡 Appel à l'API EthicalCheck
-        run: |
-          curl -X POST https://ethicalcheck.dev/api/check \
-          -H "Content-Type: application/json" \
-          -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
-      - name: Installer les dépendances
-       run: npm install
+  run: |
+    curl -X POST https://ethicalcheck.dev/api/check \
+    -H "Content-Type: application/json" \
+    -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
+
+- name: Installer les dépendances
+  run: npm install
+
 
       - name: 🛠️ Création du produit
         run: |
