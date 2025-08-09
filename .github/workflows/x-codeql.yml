@@ -60,12 +60,17 @@ jobs:
 
   
 
+   jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
       - name: 📣 Notify Slack on success
         if: success()
         run: |
           curl -X POST $SLACK_WEBHOOK_URL \
           -H 'Content-type: application/json' \
           --data '{"text":"✅ Blackbird sync terminé avec succès à 16h00."}'
+
 
       - name: 🚨 Notify Slack on failure
         if: failure()
