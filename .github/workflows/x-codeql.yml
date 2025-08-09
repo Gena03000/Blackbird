@@ -55,8 +55,20 @@ on:
   workflow_dispatch: # Permet lancement manuel si besoin
 
 jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    ...
+  
   sync:
     runs-on: ubuntu-latest
+    ...
+  products:
+    name: ✨ Sync Products
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   
 
@@ -85,7 +97,6 @@ on:
     - cron: '0 14 * * *' # 14h UTC = 16h Paris
   workflow_dispatch:
 
-jobs:
   products:
     name: ✨ Sync Products
     runs-on: ubuntu-latest
