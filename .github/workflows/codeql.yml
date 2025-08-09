@@ -60,7 +60,7 @@ jobs:
           sarif_file: ${{ matrix.language }}-results.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+✅ Corrige le workflow CodeQL Basic
 
 
 
