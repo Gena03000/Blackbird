@@ -19,7 +19,6 @@
   with:
     node-version: 18.x
 
-on:
   push:
     branches:
       - main
