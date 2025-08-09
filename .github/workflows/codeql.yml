@@ -19,14 +19,16 @@
   with:
     node-version: 18.x
 
-
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
   schedule:
-    - cron: '0 0 * * 0' # Analyse hebdomadaire
+    - cron: '0 0 * * 0'
+
 
 jobs:
   analyze:
