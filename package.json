@@ -17,8 +17,18 @@
     "express-rate-limit": "^8.0.1",
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
+    "vite": "^6.3.5",
     "winston": "^3.17.0",
-    "xss-clean": "^0.1.4"
+    "xss-clean": "^0.1.4",
+    "escape-html": "^1.0.3"
   },
+<<<<<<< HEAD
   "description": ""
+=======
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+>>>>>>> b209855de85e3f2e90b99a90e3ed4c97d9cc0059
 }
+
