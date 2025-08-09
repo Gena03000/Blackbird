@@ -1,4 +1,5 @@
 # Relance du scan après désactivation du mode par défaut
+
 name: CodeQL Basic
 
 on:
