@@ -59,9 +59,15 @@ jobs:
     runs-on: ubuntu-latest
   
   
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    # ... contenu du job analyze ...
+
   sync:
     runs-on: ubuntu-latest
-  
+    # ... contenu du job sync ...
+
   products:
     name: ✨ Sync Products
     runs-on: ubuntu-latest
@@ -69,6 +75,8 @@ jobs:
       SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
       SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    # ... contenu du job products ...
+
 
   
 
