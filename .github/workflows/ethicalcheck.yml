@@ -32,19 +32,35 @@ jobs:
       - name: 📄 Génération du rapport SARIF
         run: |
           echo '{
-            "version": "2.1.0",
-            "runs": [
-              {
-                "results": [
-                  {
-                    "ruleId": "ethical-check-001",
-                    "message": { "text": "Produit conforme aux critères éthiques." },
-                    "locations": []
-                  }
-                ]
-              }
-            ]
-          }' > ethicalcheck.sarif.json
+           {
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "EthicalCheck",
+          "version": "1.0.0",
+          "informationUri": "https://ethicalcheck.dev",
+          "rules": [
+            {
+              "id": "ethical-check-001",
+              "name": "Conformité éthique",
+              "shortDescription": { "text": "Vérifie la conformité éthique du produit." }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "ethical-check-001",
+          "message": { "text": "Produit conforme aux critères éthiques." },
+          "locations": []
+        }
+      ]
+    }
+  ]
+}
+
 
       - name: 📤 Upload du rapport SARIF
         uses: github/codeql-action/upload-sarif@v3
