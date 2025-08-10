@@ -1,1 +1,9 @@
+services:
+  - type: web
+    name: blackbird
+    env: node
+    buildCommand: "yarn install"
+    startCommand: "node server.js"
+    autoDeploy: true
+    plan: free
 
