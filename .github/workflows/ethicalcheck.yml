@@ -24,7 +24,10 @@ jobs:
           -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
 
       - name: 🛠️ Création du produit
-        run: node createProduct.js
+        run: |
+          npm install
+          node createProduct.js
+
 
       - name: 📄 Génération du rapport SARIF
         run: |
