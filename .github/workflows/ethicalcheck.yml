@@ -23,8 +23,6 @@ jobs:
           -H "Content-Type: application/json" \
           -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
 
-      - name: Installer les dépendances
-        run: npm install
 
       - name: 🛠️ Création du produit
         run: node createProduct.js
@@ -41,6 +39,20 @@ jobs:
         with:
           sarif_file: ethicalcheck.sarif.json
 
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "ethical-check-001",
+          "message": { "text": "Produit conforme aux critères éthiques." },
+          "locations": [...]
+        }
+      ]
+    }
+  ]
+}
 
 
 
