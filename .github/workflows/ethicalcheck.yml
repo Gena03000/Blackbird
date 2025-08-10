@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Vérification Git
-        run: |
-          git status || echo "Git non initialisé"
-          git config --list || echo "Pas de config Git"
+        
 
       - name: ✅ Checkout du dépôt
         uses: actions/checkout@v4
+run: |
+  # commandes shell ici
 
       - name: 📡 Appel à l'API EthicalCheck
         run: |
