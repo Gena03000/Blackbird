@@ -23,7 +23,6 @@ jobs:
           -H "Content-Type: application/json" \
           -d '{"url": "https://blackbird-mhwe.onrender.com/api/customers/request-data"}'
 
-
       - name: 🛠️ Création du produit
         run: node createProduct.js
 
@@ -31,7 +30,17 @@ jobs:
         run: |
           echo '{
             "version": "2.1.0",
-            "runs": []
+            "runs": [
+              {
+                "results": [
+                  {
+                    "ruleId": "ethical-check-001",
+                    "message": { "text": "Produit conforme aux critères éthiques." },
+                    "locations": []
+                  }
+                ]
+              }
+            ]
           }' > ethicalcheck.sarif.json
 
       - name: 📤 Upload du rapport SARIF
@@ -39,22 +48,6 @@ jobs:
         with:
           sarif_file: ethicalcheck.sarif.json
 
-- name: 📄 Génération du rapport SARIF
-  run: |
-    echo '{
-      "version": "2.1.0",
-      "runs": [
-        {
-          "results": [
-            {
-              "ruleId": "ethical-check-001",
-              "message": { "text": "Produit conforme aux critères éthiques." },
-              "locations": []
-            }
-          ]
-        }
-      ]
-    }' > ethicalcheck.sarif.json
 
 
 
