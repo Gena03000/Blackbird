@@ -1,0 +1,164 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: CodeQL
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: javascript-typescript
+            build-mode: none
+          - language: python
+            build-mode: none
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+name: 🛍️ Sync Shopify Products (Daily at 16h)
+
+on:
+  schedule:
+    - cron: '0 14 * * *' # 14h UTC = 16h Paris
+  workflow_dispatch: # Permet lancement manuel si besoin
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+  
+  
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    # ... contenu du job analyze ...
+
+  sync:
+    runs-on: ubuntu-latest
+    # ... contenu du job sync ...
+
+  products:
+    name: ✨ Sync Products
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    # ... contenu du job products ...
+
+
+  
+
+   jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📣 Notify Slack on success
+        if: success()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"✅ Blackbird sync terminé avec succès à 16h00."}'
+
+
+      - name: 🚨 Notify Slack on failure
+        if: failure()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"❌ Échec Blackbird sync à 16h00. Vérifie le workflow GitHub."}'
+name: 🛍️ Sync Shopify Products & Images (Daily at 16h)
+
+on:
+  schedule:
+    - cron: '0 14 * * *' # 14h UTC = 16h Paris
+  workflow_dispatch:
+
+  products:
+    name: ✨ Sync Products
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: 🧠 Run product sync script
+        run: node index.js
+      - name: ✅ Slack success (products)
+        if: success()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"✅ Produits Shopify mis à jour avec succès à 16h00."}'
+      - name: ❌ Slack fail (products)
+        if: failure()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"❌ Échec sync produits à 16h00. Vérifie GitHub Actions."}'
+
+  images:
+    name: 🖼️ Optimize Image Alt Texts
+    needs: products
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: 🧠 Run image SEO script
+        run: node alt-image-optimizer.js # Fichier que tu peux isoler si tu veux
+      - name: ✅ Slack success (images)
+        if: success()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"✅ Alt texts des images Shopify optimisés avec succès à 16h00."}'
+      - name: ❌ Slack fail (images)
+        if: failure()
+        run: |
+          curl -X POST $SLACK_WEBHOOK_URL \
+          -H 'Content-type: application/json' \
+          --data '{"text":"❌ Échec optimisation Alt images à 16h00. À vérifier."}'
+
