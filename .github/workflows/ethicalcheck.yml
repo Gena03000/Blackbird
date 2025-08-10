@@ -46,6 +46,10 @@ run: |
               "id": "ethical-check-001",
               "name": "Conformité éthique",
               "shortDescription": { "text": "Vérifie la conformité éthique du produit." }
+              - name: Vérification éthique
+      run: |
+      echo "Scan éthique en cours"
+
             }
           ]
         }
