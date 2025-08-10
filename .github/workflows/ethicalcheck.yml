@@ -59,7 +59,7 @@ run: |
       ]
     }
   ]
-}
+
 
 
       - name: 📤 Upload du rapport SARIF
