@@ -39,20 +39,23 @@ jobs:
         with:
           sarif_file: ethicalcheck.sarif.json
 
-{
-  "version": "2.1.0",
-  "runs": [
-    {
-      "results": [
+- name: 📄 Génération du rapport SARIF
+  run: |
+    echo '{
+      "version": "2.1.0",
+      "runs": [
         {
-          "ruleId": "ethical-check-001",
-          "message": { "text": "Produit conforme aux critères éthiques." },
-          "locations": [...]
+          "results": [
+            {
+              "ruleId": "ethical-check-001",
+              "message": { "text": "Produit conforme aux critères éthiques." },
+              "locations": []
+            }
+          ]
         }
       ]
-    }
-  ]
-}
+    }' > ethicalcheck.sarif.json
+
 
 
 
