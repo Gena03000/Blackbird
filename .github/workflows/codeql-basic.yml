@@ -1,0 +1,28 @@
+# Relance du scan après désactivation du mode par défaut
+- name: Upload SARIF results
+  uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: blackbird-python-results.sarif
+  env:
+    GITHUB_TOKEN: ${{ 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
+ }}
+
+
+name: CodeQL Basic
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: python
+      - uses: github/codeql-action/analyze@v3
+
+✅ Corrige le workflow CodeQL Basic
+

@@ -1,3 +1,14 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
 name: CodeQL
 
 on:
@@ -44,17 +55,42 @@ on:
   workflow_dispatch: # Permet lancement manuel si besoin
 
 jobs:
+  analyze:
+    runs-on: ubuntu-latest
+  
+  
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    # ... contenu du job analyze ...
+
   sync:
     runs-on: ubuntu-latest
+    # ... contenu du job sync ...
+
+  products:
+    name: ✨ Sync Products
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    # ... contenu du job products ...
+
 
   
 
+   jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
       - name: 📣 Notify Slack on success
         if: success()
         run: |
           curl -X POST $SLACK_WEBHOOK_URL \
           -H 'Content-type: application/json' \
           --data '{"text":"✅ Blackbird sync terminé avec succès à 16h00."}'
+
 
       - name: 🚨 Notify Slack on failure
         if: failure()
@@ -69,7 +105,6 @@ on:
     - cron: '0 14 * * *' # 14h UTC = 16h Paris
   workflow_dispatch:
 
-jobs:
   products:
     name: ✨ Sync Products
     runs-on: ubuntu-latest
