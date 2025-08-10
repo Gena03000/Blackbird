@@ -9,3 +9,5 @@ __pycache__/
 # OS / Editor
 .DS_Store
 *.swp
+fantome-backend/
+hydrogen-storefront/
