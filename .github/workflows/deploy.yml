@@ -19,13 +19,19 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Gena Campbell"
+
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up
+        run: railway up --project 9c1874c9-56c5-4464-8ede-4e97445d81c9
+
 
 
 
