@@ -1,15 +1,21 @@
 {
   "name": "blackbird",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "agent/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node agent/index.js",
+    "dev": "nodemon agent/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gena Campbell",
   "license": "ISC",
-  "description": "",
+  "description": "Agent Shopify pour FantomeWear",
+  "homepage": "https://prolific-gentleness.up.railway.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gena03000/Blackbird.git"
+  },
   "dependencies": {
     "axios": "^1.11.0",
     "cors": "^2.8.5",
@@ -27,5 +33,6 @@
     "nodemon": "^3.1.10"
   }
 }
+
 
 
