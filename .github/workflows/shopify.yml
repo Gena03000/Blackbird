@@ -1,7 +1,1 @@
-- name: Deploy to Railway
-  env:
-    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-  run: |
-    npm install -g railway
-    railway up
 
