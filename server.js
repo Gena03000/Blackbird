@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const aiModule = require('./ai/tonFichierAI');
-// ai/tonFichierAI.js
+
 module.exports = {
   respond: () => "Réponse par défaut du module AI"
 };
