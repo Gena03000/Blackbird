@@ -11,3 +11,19 @@ __pycache__/
 *.swp
 fantome-backend/
 hydrogen-storefront/
+# Logs
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# Coverage
+coverage/
