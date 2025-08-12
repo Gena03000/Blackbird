@@ -9,6 +9,7 @@
     RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
 
+
 permissions:
   contents: read
   actions: read
