@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const aiModule = require('./ai/tonFichierAI');
+// ai/tonFichierAI.js
+module.exports = {
+  respond: () => "Réponse par défaut du module AI"
+};
 
 // Port d'écoute (Render ou Railway utilise process.env.PORT)
 const port = process.env.PORT || 3000;
