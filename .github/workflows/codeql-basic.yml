@@ -1,6 +1,13 @@
+name: CodeQL Basic
+
+on:
+  push:
+    branches: [main]
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,7 +25,8 @@ jobs:
         with:
           sarif_file: blackbird-python-results.sarif
         env:
-          GITHUB_TOKEN: ${{ secrets.CODEQL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
