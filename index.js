@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
 
-// 🔹 Page d’accueil
 app.get('/', (req, res) => {
   res.send('Bienvenue sur Backend Fantôme 👻');
 });
 
-// 🔹 Liste des produits Fantôme (Mock API)
+
 app.get('/api/produits', (req, res) => {
   const produits = [
     {
@@ -41,8 +39,4 @@ app.get('/api/produits', (req, res) => {
   res.json(produits);
 });
 
-// 🔹 Lancement du serveur
-app.listen(PORT, () => {
-  console.log(`🎉 Serveur lancé sur http://localhost:${PORT}`);
-});
 
