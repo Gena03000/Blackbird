@@ -1,34 +1,7 @@
-name: Deploy Shopify Agent
+- name: Deploy to Railway
+  env:
+    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+  run: |
+    npm install -g railway
+    railway up
 
-on:
-  push:
-    branches:
-      - shopify
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./shopify-agent
-
-      - name: Run tests
-        run: npm test
-        working-directory: ./shopify-agent
-
-      - name: Deploy to Railway
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: |
-          npm install -g railway
-          railway up --project shopify-agent
