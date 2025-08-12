@@ -5,9 +5,8 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-app.listen(PORT, () => {
-  console.log(`🎉 Agent Shopify lancé sur http://localhost:${PORT}`);
-});
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -58,6 +57,12 @@ app.post('/apps/blackbird-agent/webhook', (req, res) => {
   }
   res.status(200).send('Webhook reçu');
 });
+
+/** 🔹 Lancement du serveur */
+app.listen(PORT, () => {
+  console.log(`🎉 Agent Shopify lancé sur http://localhost:${PORT}`);
+});
+
 
 
 
