@@ -38,7 +38,8 @@ jobs:
         with:
           sarif_file: blackbird-python-results.sarif
         env:
-          CODEQL_TOKEN: ${{ secrets.CODEQL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
