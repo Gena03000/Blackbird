@@ -1,18 +1,23 @@
-name: CodeQL Basic
+name: Blackbird CI/CD
 
 on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
 jobs:
-  analyze:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -20,11 +25,22 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Link to Railway project
-        run: railway link
+      - name: Login to Railway
+        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
 
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      - name: Link to Railway project
+        run: railway link d9168a4f-9d6e-482b-b876-f2bbd343fa9c
+
+      - name: Deploy to Railway
+        run: railway up
+
+  codeql-analysis:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -35,11 +51,12 @@ jobs:
         uses: github/codeql-action/analyze@v3
 
       - name: Upload SARIF results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: blackbird-python-results.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 
