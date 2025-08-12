@@ -3,6 +3,10 @@ name: CodeQL Basic
 on:
   push:
     branches: [main]
+- name: Link to Railway project
+  run: railway link YOUR_PROJECT_ID
+  env:
+    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
 jobs:
   analyze:
