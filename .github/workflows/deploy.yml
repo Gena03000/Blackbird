@@ -1,8 +1,13 @@
-name: Blackbird CI/CD
+- name: Link to Railway project
+  run: railway link d9168a4f-9d6e-482b-b876-f2bbd343fa9c
+  env:
+    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-on:
-  push:
-    branches: [main]
+- name: Deploy to Railway
+  run: railway up
+  env:
+    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
 
 permissions:
   contents: read
