@@ -33,6 +33,15 @@
     "nodemon": "^3.1.10"
   }
 }
+"keywords": ["shopify", "seo", "express", "nodejs", "ecommerce", "blackbird"]
+"bugs": {
+  "url": "https://github.com/Gena03000/Blackbird/issues"
+}
+"engines": {
+  "node": ">=18.0.0"
+}
+"type": "module"
+"test": "jest"
 
 
 
