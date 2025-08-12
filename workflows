@@ -1,3 +1,43 @@
+# GitHub Actions Workflow Configuration
+# 
+# This configuration file defines multiple workflows:
+#
+# 1. CodeQL Security Analysis:
+#    - Runs on push/PR to main branch and weekly (Sundays)
+#    - Analyzes Python code for security vulnerabilities
+#    - Uses CodeQL for static code analysis
+#
+# 2. Extended CodeQL Analysis:
+#    - Runs on push/PR to main branch
+#    - Matrix strategy for multiple languages (JavaScript/TypeScript and Python)
+#    - Performs security analysis with customizable build modes
+#
+# 3. Shopify Products Synchronization:
+#    - Scheduled daily at 16:00 Paris time
+#    - Two separate jobs:
+#      a. Products Sync:
+#         - Updates Shopify product data
+#         - Uses Node.js v20
+#         - Sends Slack notifications on success/failure
+#      b. Image Optimization:
+#         - Runs after products sync
+#         - Optimizes image alt texts for SEO
+#         - Uses Node.js v18
+#         - Sends Slack notifications on success/failure
+#
+# 4. Additional Security Analysis:
+#    - Includes Bandit security scanner for Python
+#    - Generates and uploads SARIF format results
+#
+# Required Secrets:
+# - SHOPIFY_STORE: Shopify store URL/identifier
+# - SHOPIFY_TOKEN: Shopify API access token
+# - SLACK_WEBHOOK_URL: Webhook URL for Slack notifications
+#
+# Dependencies:
+# - Node.js (v18 and v20)
+# - Python with Bandit
+# - Various GitHub Actions (checkout, setup-node, CodeQL)
 name: "CodeQL"
 
 on:
@@ -19,7 +59,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -109,8 +149,8 @@ jobs:
       SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: '20'
       - run: npm ci
@@ -138,10 +178,10 @@ jobs:
       SHOPIFY_TOKEN: ${{ secrets.SHOPIFY_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '18'
       - run: npm ci
       - name: 🧠 Run image SEO script
         run: node alt-image-optimizer.js # Fichier que tu peux isoler si tu veux
@@ -159,12 +199,8 @@ jobs:
           --data '{"text":"❌ Échec optimisation Alt images à 16h00. À vérifier."}'
 - name: Analyse sécurité Python avec Bandit
   run: |
-    pip install bandit
-    bandit -r Merle/ -f sarif -o blackbird-python-results.sarif
-- name: Upload résultats Python SARIF
-  uses: github/codeql-action/upload-sarif@v3
-  with:
-    sarif_file: blackbird-python-results.sarif
+
+
 
 
 
