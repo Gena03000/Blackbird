@@ -3,7 +3,7 @@ name: Deploy to Railway
 on:
   push:
     branches:
-      - main
+      - main  # ou la branche que tu veux surveiller
 
 jobs:
   deploy:
@@ -11,15 +11,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # ou une version compatible avec Railway CLI
 
       - name: Install Railway CLI
-        run: npm install -g railway
+        run: npm install -g @railway/cli
 
       - name: Deploy to Railway
-        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up
+
 
 
 
