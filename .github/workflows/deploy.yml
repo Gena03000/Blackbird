@@ -29,7 +29,7 @@ jobs:
         with:
           sarif_file: blackbird-python-results.sarif
         env:
-        CodeQL_TOKEN: ${{ secrets.CodeQL_TOKEN }}
+        CODEQL_TOKEN: ${{ secrets.CODEQL_TOKEN }}
 
 
 
