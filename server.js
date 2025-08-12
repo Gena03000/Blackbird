@@ -22,4 +22,7 @@ app.get('/health', (req, res) => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
 });
+app.get('/ping', (req, res) => {
+  res.send('🟢 Agent actif et prêt !');
+});
 
