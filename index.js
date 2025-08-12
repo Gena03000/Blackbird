@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// 🔹 Page d’accueil
+app.use(express.json());
+
+/** 🔹 Page d’accueil */
 app.get('/', (req, res) => {
   res.send('Bienvenue sur Backend Fantôme 👻');
 });
 
-// 🔹 Liste des produits Fantôme (Mock API)
+/** 🔹 API produits Fantôme */
 app.get('/api/produits', (req, res) => {
   const produits = [
     {
@@ -41,8 +43,22 @@ app.get('/api/produits', (req, res) => {
   res.json(produits);
 });
 
-// 🔹 Lancement du serveur
-app.listen(PORT, () => {
-  console.log(`🎉 Serveur lancé sur http://localhost:${PORT}`);
+/** 🔹 Webhook Railway → Shopify */
+app.post('/apps/blackbird-agent/webhook', (req, res) => {
+  const { event, project, timestamp } = req.body;
+
+  console.log(`🚀 Événement Railway reçu : ${event} pour ${project} à ${timestamp}`);
+
+  if (event === 'DEPLOYMENT_SUCCEEDED') {
+    // Action Shopify ici (ex: appel API, notification, etc.)
+    console.log('✅ Déploiement réussi, Shopify peut réagir');
+  }
+
+  res.status(200).send('Webhook reçu');
+});
+
+/** 🔹 Lancement du serveur */
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🎉 Agent Shopify lancé sur http://localhost:${PORT}`);
 });
 
