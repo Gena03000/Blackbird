@@ -12,7 +12,7 @@ app.use(express.json());
 
 /** 🔹 Page d’accueil */
 app.get('/', (req, res) => {
-  res.send('✅ Blackbird est en ligne !');
+  res.send('✅ Blackbird est en ligne sur Railway !');
 });
 
 /** 🔹 API produits Fantôme */
@@ -60,8 +60,9 @@ app.post('/apps/blackbird-agent/webhook', (req, res) => {
 
 /** 🔹 Lancement du serveur */
 app.listen(PORT, () => {
-  console.log(`🎉 Agent Shopify lancé sur http://localhost:${PORT}`);
+  console.log(`🎉 Agent Shopify lancé sur Railway (port ${PORT})`);
 });
+
 
 
 
