@@ -26,6 +26,10 @@ jobs:
           sarif_file: blackbird-python-results.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+permissions:
+  actions: read
+  contents: read
+  security-events: write
 
 
 
