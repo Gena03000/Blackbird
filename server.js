@@ -24,7 +24,7 @@ app.get('/shopify', (req, res) => {
 });
 
 // Port d'écoute
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
