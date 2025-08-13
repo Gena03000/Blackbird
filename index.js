@@ -4,6 +4,7 @@ const app = express();
 app.get('/', (req, res) => {
   res.send('Bienvenue sur Backend Fantôme 👻');
 });
+const apiKey = process.env.API_KEY;
 
 
 app.get('/api/produits', (req, res) => {
