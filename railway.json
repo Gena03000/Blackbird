@@ -5,7 +5,7 @@
   },
   "deploy": {
     "runtime": "V2",
-    "numReplicas": 0,
+    "numReplicas": 1,
     "overlapSeconds": 0,
     "drainingSeconds": 0,
     "sleepApplication": false,
