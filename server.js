@@ -49,7 +49,7 @@ app.post('/webhook', (req, res) => {
 });
 
 // Démarrage du serveur
-app.listen(port, '3.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
 });
 
