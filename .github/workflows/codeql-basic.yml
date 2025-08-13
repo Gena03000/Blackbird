@@ -12,8 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-        with:
-          sarif_file: blackbird-python-results.sarif
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
