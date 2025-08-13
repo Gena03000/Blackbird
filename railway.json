@@ -6,6 +6,8 @@
   "deploy": {
     "runtime": "V2",
     "numReplicas": 1,
+    "overlapSeconds": 0,
+    "drainingSeconds": 0,
     "sleepApplication": false,
     "multiRegionConfig": {
       "europe-west4-drams3a": {
