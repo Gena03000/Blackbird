@@ -24,6 +24,10 @@ app.get('/ping', (req, res) => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
 });
+app.post('/webhook', (req, res) => {
+  console.log('📦 Webhook Shopify reçu');
+  res.sendStatus(200);
+});
 
 
 
