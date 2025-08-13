@@ -5,6 +5,7 @@ app.get('/shopify', (req, res) => {
   res.send('🛍️ Interface Shopify Merle-noir active');
 });
 
+
 // Port d'écoute
 const port = process.env.PORT || 3000;
 
