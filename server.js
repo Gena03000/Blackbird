@@ -1,10 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
+// Shopify install route
+app.get('/shopify/install', (req, res) => {
+  const shop = req.query.shop;
+  if (!shop) {
+    return res.status(400).send('❌ Paramètre "shop" manquant');
+  }
+
+  const apiKey = process.env.SHOPIFY_API_KEY;
+  const scopes = 'read_products,write_orders';
+  const redirectUri = `https://merle.up.railway.app/shopify/callback`;
+
+  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${apiKey}&scope=${scopes}&redirect_uri=${redirectUri}`;
+
+  res.redirect(installUrl);
+});
+
+// Existing Shopify endpoint
 app.get('/shopify', (req, res) => {
   res.send('🛍️ Interface Shopify Merle-noir active');
 });
-
 
 // Port d'écoute
 const port = process.env.PORT || 3000;
@@ -25,13 +42,15 @@ app.get('/ping', (req, res) => {
   res.send('🟢 Agent actif et prêt !');
 });
 
-// Démarrage du serveur
-app.listen(port, '0.0.0.0', () => {
-  console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
-});
+// Webhook endpoint
 app.post('/webhook', (req, res) => {
   console.log('📦 Webhook Shopify reçu');
   res.sendStatus(200);
+});
+
+// Démarrage du serveur
+app.listen(port, '0.0.0.0', () => {
+  console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
 });
 
 
