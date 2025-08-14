@@ -58,10 +58,10 @@ app.post('/webhook', (req, res) => {
 });
 
 // Démarrage du serveur
-const isRailway = !!process.env.PORT;
-const displayUrl = isRailway
   ? 'https://merle.up.railway.app'
-  : `http://localhost:${port}`;
+  const port = process.env.PORT || 3000;
+const displayUrl = process.env.PORT ? 'https://merle.up.railway.app' : `http://localhost:${port}`;
+
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`🧶 Serveur textile actif sur ${displayUrl}`);
