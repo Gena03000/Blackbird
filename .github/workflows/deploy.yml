@@ -11,8 +11,9 @@ jobs:
 runs-on: ubuntu-latest
 
     steps:
-      - name: 🧾 Debug PORT value
-        run: echo "PORT is $PORT"
+     - name: 🧾 Debug PORT value
+  run: echo "PORT is $PORT"
+
 
       - name: ✅ Validate PORT
         run: |
