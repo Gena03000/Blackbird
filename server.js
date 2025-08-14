@@ -1,9 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-app.get('/status', (req, res) => {
-  res.send('🧶 Serveur textile actif sur Railway');
-});
 
 // Shopify install route
 app.get('/shopify/install', (req, res) => {
@@ -43,6 +40,10 @@ app.get('/health', (req, res) => {
 
 app.get('/ping', (req, res) => {
   res.send('🟢 Agent actif et prêt !');
+});
+
+app.get('/status', (req, res) => {
+  res.send('🧶 Serveur textile actif sur Railway');
 });
 
 // Webhook endpoint
