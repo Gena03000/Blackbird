@@ -1,5 +1,8 @@
 name: 🚀 Build and Deploy to Railway
-PORT=${PORT:-4000}
+- name: 🔧 Définir le PORT par défaut
+  run: |
+    PORT=${PORT:-4000}
+
 
 on:
   push:
