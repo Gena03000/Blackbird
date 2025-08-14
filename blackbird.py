@@ -1,6 +1,32 @@
 from pyfiglet import figlet_format
 import os
 import subprocess
+from utils.cache import set_cache, get_cache
+from rss_handler import parser_flux
+
+def traiter_flux(url):
+    contenu = get_cache(url)
+    if contenu:
+        print(f"✅ Flux récupéré depuis Redis pour {url}")
+        return contenu
+
+    print(f"📡 Téléchargement du flux depuis {url}")
+    contenu = parser_flux(url)
+    set_cache(url, contenu)
+    return contenu
+
+def main():
+    flux_urls = [
+        "https://example.com/rss1.xml",
+        "https://example.com/rss2.xml"
+    ]
+
+    for url in flux_urls:
+        contenu = traiter_flux(url)
+        # Tu peux ensuite injecter ce contenu dans Shopify via theme_updater
+
+if __name__ == "__main__":
+    main()
 
 def compile_file(file_path):
     try:
