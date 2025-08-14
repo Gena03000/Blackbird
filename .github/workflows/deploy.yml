@@ -1,3 +1,10 @@
+name: 🚀 Build and Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -12,12 +19,6 @@ jobs:
             exit 1
           fi
 
-      - name: ✅ Check Railway token presence
-        run: |
-          if [ -z "${{ secrets.RAILWAY_TOKEN }}" ]; then
-            echo "❌ Railway token is missing"
-            exit 1
-          fi
 
     - name: ✅ Check Railway token presence
   run: |
