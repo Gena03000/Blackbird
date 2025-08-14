@@ -2,11 +2,11 @@
   "name": "blackbird",
   "version": "1.0.0",
   "main": "agent/index.js",
-  "scripts": {
-    "start": "node agent/index.js",
-    "dev": "nodemon agent/index.js",
-    "test": "jest"
-  },
+ "scripts": {
+  "start": "node server.js",
+  "test": "jest",
+  "dev": "nodemon agent/index.js"
+}
   "scripts": {
   "check:railway": "node railway.js"
 }
