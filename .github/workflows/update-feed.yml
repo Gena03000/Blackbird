@@ -1,0 +1,33 @@
+name: Update Shopify Feed
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Tous les jours à 3h du matin
+  workflow_dispatch:     # Permet de lancer manuellement
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Generate XML feed
+      run: python generate_feed.py
+
+    - name: Commit and push changes
+      run: |
+        git config user.name "GenaBot"
+        git config user.email "genabot@example.com"
+        git add shopify-feed.xml
+        git commit -m "🛍️ Mise à jour automatique du flux produit"
+        git push
