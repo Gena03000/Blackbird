@@ -1,11 +1,9 @@
 {
-  "startCommand": "node server.js",
-  "installCommand": "npm install",
-  "buildCommand": null,
-  "rootDirectory": "."
-}
-{
   "$schema": "https://railway.com/railway.schema.json",
+  "rootDirectory": ".",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "startCommand": "node index.js",
   "build": {
     "builder": "NIXPACKS",
     "buildCommand": "npm run build"
@@ -24,3 +22,4 @@
     "restartPolicyMaxRetries": 10
   }
 }
+
