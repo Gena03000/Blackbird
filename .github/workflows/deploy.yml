@@ -26,6 +26,12 @@ jobs:
             echo "❌ Invalid PORT: $PORT"
             exit 1
           fi
+- name: ✅ Check Railway token presence
+  run: |
+    if [ -z "${{ secrets.RAILWAY_TOKEN }}" ]; then
+      echo "❌ Railway token is missing"
+      exit 1
+    fi
 
       - name: 📦 Checkout code
         uses: actions/checkout@v4
