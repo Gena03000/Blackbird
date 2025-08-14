@@ -1,4 +1,6 @@
 name: 🚀 Build and Deploy to Railway
+- name: 🧾 Debug PORT value
+  run: echo "PORT is $PORT"
 
 on:
   push:
