@@ -8,9 +8,6 @@ on:
   schedule:
     - cron: '33 17 * * 5'
 
-app.get('/ping', (req, res) => {
-  res.send('pong');
-});
 
 jobs:
   analyze:
