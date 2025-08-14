@@ -1,16 +1,32 @@
-# Image Node officielle
-FROM node:20
+# Étape 1 : build dans une image légère
+FROM node:18-alpine AS build
 
-# Dossier de travail
 WORKDIR /app
 
-# Copie des fichiers
+# Copie des fichiers nécessaires
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install --production
+
 COPY . .
+
+# Étape 2 : exécution dans une image encore plus légère
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copie des fichiers depuis l'étape build
+COPY --from=build /app /app
+
+# Sécurité : permissions strictes
+RUN chmod 600 /app/.env || true
+
+# Variables d’environnement recommandées
+ENV NODE_ENV=production
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 # Port exposé
 EXPOSE 3000
 
-# Lancement du serveur
+# Commande de démarrage
 CMD ["node", "server.js"]
+
