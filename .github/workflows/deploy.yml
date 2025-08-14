@@ -42,7 +42,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: 🔐 Login to Railway
-        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+        run: echo "${{ secrets.RAILWAY_TOKEN }}" | railway login
 
       - name: 🔗 Link to Railway project
         run: railway link d9168a4f-9d6e-482b-b876-f2bbd343fa9c
@@ -69,6 +69,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: blackbird-python-results.sarif
+
 
 
 
