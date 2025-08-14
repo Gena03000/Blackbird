@@ -7,6 +7,10 @@
     "dev": "nodemon agent/index.js",
     "test": "jest"
   },
+  "scripts": {
+  "check:railway": "node railway.js"
+}
+
   "keywords": ["shopify", "seo", "express", "nodejs", "ecommerce", "blackbird"],
   "author": "Gena Campbell",
   "license": "ISC",
