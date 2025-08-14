@@ -7,6 +7,8 @@ ACCESS_TOKEN = os.getenv("SHOPIFY_TOKEN")
 SHOP_NAME = "bnjjbc-k1"
 API_VERSION = "2023-01"
 
+print("🧵 Flux RSS généré à", datetime.now())
+
 # 📦 URL de l'API produits
 url = f"https://{SHOP_NAME}.myshopify.com/admin/api/{API_VERSION}/products.json"
 
