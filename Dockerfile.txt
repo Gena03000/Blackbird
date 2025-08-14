@@ -29,4 +29,7 @@ EXPOSE 3000
 
 # Commande de démarrage
 CMD ["node", "server.js"]
+"scripts": {
+  "start": "node server.js"
+}
 
