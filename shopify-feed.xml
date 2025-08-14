@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>Flux produits Gena</title>
+    <link>https://bnjjbc-k1.myshopify.com</link>
+    <description>Produits de la boutique Gena</description>
+
+    <!-- Exemple statique : tu peux automatiser ça plus tard -->
+    <item>
+      <g:id>10001</g:id>
+      <g:title>Sac à main cuir noir</g:title>
+      <g:description>Sac élégant en cuir véritable, parfait pour toutes les occasions.</g:description>
+      <g:link>https://bnjjbc-k1.myshopify.com/products/sac-cuir-noir</g:link>
+      <g:image_link>https://cdn.shopify.com/s/files/1/0000/0001/products/sac-cuir-noir.jpg</g:image_link>
+      <g:price>89.00 EUR</g:price>
+      <g:availability>in stock</g:availability>
+      <g:condition>new</g:condition>
+    </item>
+
+    <!-- Tu peux ajouter d'autres produits ici -->
+  </channel>
+</rss>
