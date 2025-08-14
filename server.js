@@ -23,8 +23,13 @@ app.get('/shopify', (req, res) => {
   res.send('🛍️ Interface Shopify Merle-noir active');
 });
 
-// Port d'écoute
-const port = process.env.PORT || 4000;
+const isRailway = !!process.env.PORT;
+const displayUrl = isRailway
+  ? `https://merle.up.railway.app`
+  : `http://localhost:${port}`;
+
+console.log(`🧶 Serveur textile actif sur ${displayUrl}`);
+
 
 // Middleware
 app.use(express.json());
@@ -53,8 +58,13 @@ app.post('/webhook', (req, res) => {
 });
 
 // Démarrage du serveur
+const isRailway = !!process.env.PORT;
+const displayUrl = isRailway
+  ? 'https://merle.up.railway.app'
+  : `http://localhost:${port}`;
+
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
+  console.log(`🧶 Serveur textile actif sur ${displayUrl}`);
 });
 
 
