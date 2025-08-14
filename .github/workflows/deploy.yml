@@ -1,4 +1,5 @@
 name: 🚀 Build and Deploy to Railway
+PORT=${PORT:-4000}
 
 on:
   push:
