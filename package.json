@@ -1,11 +1,10 @@
-"scripts": {
-  "start": "node server.js",
-  "test": "jest",
-  "dev": "nodemon agent/index.js",
-  "check:railway": "node railway.js"
-}
-
-
+{
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest",
+    "dev": "nodemon agent/index.js",
+    "check:railway": "node railway.js"
+  },
   "keywords": ["shopify", "seo", "express", "nodejs", "ecommerce", "blackbird"],
   "author": "Gena Campbell",
   "license": "ISC",
@@ -37,4 +36,5 @@
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
+}
 
