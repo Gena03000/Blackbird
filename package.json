@@ -1,25 +1,15 @@
 {
+  "name": "blackbird",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest",
-    "dev": "nodemon agent/index.js",
-    "check:railway": "node railway.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["shopify", "seo", "express", "nodejs", "ecommerce", "blackbird"],
-  "author": "Gena Campbell",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "description": "Agent Shopify pour FantomeWear",
-  "homepage": "https://prolific-gentleness.up.railway.app",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Gena03000/Blackbird.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Gena03000/Blackbird/issues"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
+  "description": "",
   "dependencies": {
     "axios": "^1.11.0",
     "cors": "^2.8.5",
@@ -36,5 +26,10 @@
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
+}
+"scripts": {
+  "start": "node server.js",
+  "build": "echo \"No build step required\"",
+  "test": "echo \"Error: no test specified\" && exit 1"
 }
 
