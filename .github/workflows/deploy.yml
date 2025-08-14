@@ -1,20 +1,18 @@
-name: 🚀 Build and Deploy to Railway
-- name: 🔧 Définir le PORT par défaut
-  run: |
-    PORT=${PORT:-4000}
-
+name: 🚀 Construire et déployer sur Railway
 
 on:
   push:
     branches:
-      - main
+      - principal
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🧾 Debug PORT value
-        run: echo "PORT is $PORT"
+      - name: 🔧 Définir le PORT par défaut
+        run: |
+          PORT=${PORT:-4000}
+
 
       - name: ✅ Validate PORT
         run: |
