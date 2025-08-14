@@ -18,6 +18,7 @@
     "restartPolicyMaxRetries": 10
   }
 }
+const PORT = parseInt(process.env.PORT, 10) || 4000;
 
 
 app.use(express.json());
