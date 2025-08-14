@@ -10,12 +10,6 @@ permissions:
   actions: read
   security-events: write
 
-env:
-  PORT: 4000
-  SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
-  SHOPIFY_API_SECRET: ${{ secrets.SHOPIFY_API_SECRET }}
-  RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
