@@ -7,28 +7,24 @@ on:
 
 jobs:
   build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧾 Debug PORT value
+        run: echo "PORT is $PORT"
 
-runs-on: ubuntu-latest
+      - name: ✅ Validate PORT
+        run: |
+          if ! [[ "$PORT" =~ ^[0-9]+$ ]] || [ "$PORT" -lt 0 ] || [ "$PORT" -gt 65535 ]; then
+            echo "❌ Invalid PORT: $PORT"
+            exit 1
+          fi
 
-steps:
-  - name: 🧾 Debug PORT value
-    run: echo "PORT is $PORT"
-
-  - name: ✅ Validate PORT
-    run: |
-      if ! [[ "$PORT" =~ ^[0-9]+$ ]] || [ "$PORT" -lt 0 ] || [ "$PORT" -gt 65535 ]; then
-        echo "❌ Invalid PORT: $PORT"
-        exit 1
-      fi
-
-
-
-    - name: ✅ Check Railway token presence
-  run: |
-    if [ -z "${{ secrets.RAILWAY_TOKEN }}" ]; then
-      echo "❌ Railway token is missing"
-      exit 1
-    fi
+      - name: ✅ Check Railway token presence
+        run: |
+          if [ -z "${{ secrets.RAILWAY_TOKEN }}" ]; then
+            echo "❌ Railway token is missing"
+            exit 1
+          fi
 
       - name: 📦 Checkout code
         uses: actions/checkout@v4
@@ -69,6 +65,7 @@ steps:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: blackbird-python-results.sarif
+
 
 
 
