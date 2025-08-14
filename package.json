@@ -1,15 +1,10 @@
-{
-  "name": "blackbird",
-  "version": "1.0.0",
-  "main": "agent/index.js",
- "scripts": {
+"scripts": {
   "start": "node server.js",
   "test": "jest",
-  "dev": "nodemon agent/index.js"
-}
-  "scripts": {
+  "dev": "nodemon agent/index.js",
   "check:railway": "node railway.js"
 }
+
 
   "keywords": ["shopify", "seo", "express", "nodejs", "ecommerce", "blackbird"],
   "author": "Gena Campbell",
