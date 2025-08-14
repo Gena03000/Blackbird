@@ -1,6 +1,12 @@
 name: 🚀 Build and Deploy to Railway
 - name: 🧾 Debug PORT value
   run: echo "PORT is $PORT"
+- name: ✅ Validate PORT
+  run: |
+    if ! [[ "$PORT" =~ ^[0-9]+$ ]] || [ "$PORT" -lt 0 ] || [ "$PORT" -gt 65535 ]; then
+      echo "❌ Invalid PORT: $PORT"
+      exit 1
+    fi
 
 on:
   push:
