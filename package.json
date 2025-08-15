@@ -28,5 +28,9 @@
     "nodemon": "^3.1.10"
   }
 }
+"scripts": {
+  "dev": "node dev.js",
+  "start": "node prod.js"
+}
 
 
