@@ -14,12 +14,10 @@ jobs:
           PORT=${PORT:-4000}
 
 
-      - name: ✅ Validate PORT
-        run: |
-          if ! [[ "$PORT" =~ ^[0-9]+$ ]] || [ "$PORT" -lt 0 ] || [ "$PORT" -gt 65535 ]; then
-            echo "❌ Invalid PORT: $PORT"
-            exit 1
-          fi
+     - name: 🔧 Définir le PORT par défaut
+  run: |
+    PORT=${PORT:-3000}
+
 
       - name: ✅ Check Railway token presence
         run: |
