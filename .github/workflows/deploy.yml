@@ -9,14 +9,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔧 Définir le PORT par défaut
-        run: |
-          PORT=${PORT:-4000}
-
-
-     - name: 🔧 Définir le PORT par défaut
+   - name: 🔧 Définir le PORT par défaut
   run: |
-    PORT=${PORT:-3000}
+    PORT=${PORT:-4000}
+
 
 
       - name: ✅ Check Railway token presence
