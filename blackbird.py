@@ -3,6 +3,19 @@ import os
 import subprocess
 from utils.cache import set_cache, get_cache
 from rss_handler import parser_flux
+from flask import Flask, send_file
+app = Flask(__name__)
+
+@app.route('/feed.xml')
+def feed():
+    return send_file('rss-ligne25.xml')
+
+@app.route('/')
+def home():
+    return "Blackbird est prêt à voler 🕊️"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3000)
 
 def traiter_flux(url):
     contenu = get_cache(url)
