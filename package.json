@@ -3,7 +3,7 @@
   "version": "1.0.0",
    "main": "shopify_/server.js",
 "scripts": {
-  "start": "node shopify_/server.js"
+  "start": "node server.js"
 },
 
     "build": "echo \"No build step required\"",
