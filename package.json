@@ -43,6 +43,8 @@
     "@modelcontextprotocol/sdk": "^1.6.0",
     "fuse.js": "^7.1.0",
     "zod": "^3.24.2"
+    "vitest": "^1.0.0"
+
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
