@@ -1,6 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
 import os
+from datetime import datetime
 
 # 🔐 Récupération du token Shopify depuis les secrets GitHub
 ACCESS_TOKEN = os.getenv("SHOPIFY_TOKEN")
