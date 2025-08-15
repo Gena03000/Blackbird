@@ -35,6 +35,7 @@ app.get('/shopify/install', (req, res) => {
   if (!shop) {
     return res.status(400).send('❌ Paramètre "shop" manquant');
   }
+const installUrl = `https://${shop}/admin/oauth/authorize?...`
 
   const apiKey = process.env.SHOPIFY_API_KEY;
   const scopes = 'read_products,write_orders';
