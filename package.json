@@ -2,7 +2,7 @@
 {
   "name": "blackbird",
   "version": "1.0.0",
-  "main": "shopify_/server.js",
+   "main": "shopify_/server.js",
 "scripts": {
   "start": "node shopify_/server.js"
 }
