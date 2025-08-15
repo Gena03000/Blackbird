@@ -59,7 +59,7 @@ app.post('/webhook', (req, res) => {
 
 // Démarrage du serveur
   ? 'https://merle.up.railway.app'
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 4000;
 const displayUrl = process.env.PORT ? 'https://merle.up.railway.app' : `http://localhost:${port}`;
 
 
