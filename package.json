@@ -61,4 +61,3 @@
     "typescript-transform-paths": "^3.5.3"
   }
 }
-"test": "vitest run"
