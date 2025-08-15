@@ -9,9 +9,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔧 Définir le PORT par défaut
-        run: |
-          PORT=${PORT:-4000}
+- name: 🔧 Définir le PORT par défaut
+  run: |
+    echo "PORT=${PORT:-4000}" >> $GITHUB_ENV
+
 
 
 
