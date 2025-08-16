@@ -2,38 +2,35 @@ name: Déployer Jekyll sur GitHub Pages
 
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: 📦 Checkout du dépôt
-        uses: actions/checkout@v4
 
-      - name: 🧱 Configuration Ruby et Jekyll
+    steps:
+      - name: 📥 Checkout du dépôt
+        uses: actions/checkout@v3
+
+      - name: 🔧 Configuration Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: 📦 Installer les dépendances
-        run: bundle install
+      - name: 📦 Installation des dépendances
+        run: |
+          gem install bundler
+          bundle install
 
-      - name: 🏗️ Générer le site Jekyll
+      - name: 🏗️ Build du site Jekyll
         run: bundle exec jekyll build
 
-      - name: 📤 Préparer les artefacts pour GitHub Pages
-        uses: actions/upload-pages-artifact@v4
+      - name: 🚀 Déploiement sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: _site
-
-      - name: 🚀 Déployer sur GitHub Pages
-        uses: actions/deploy-pages@v2
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
 
 
