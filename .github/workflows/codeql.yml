@@ -1,4 +1,6 @@
-name: "CodeQL + Deploy Railway"
+- name: 🚀 Deploy to Railway
+  run: railway up --service=nom-du-service --token $RAILWAY_TOKEN
+
 
 on:
   push:
