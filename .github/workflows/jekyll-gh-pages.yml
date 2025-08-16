@@ -1,47 +1,38 @@
-# 🚀 Workflow pour construire et déployer un site Jekyll sur GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+name: Déployer Jekyll sur GitHub Pages
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches: [main]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 📦 Checkout repository
+      - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: 🛠️ Build Jekyll site
-        uses: actions/jekyll-build-pages@v1
+      - name: 🧱 Configuration Ruby et Jekyll
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: '3.1'
+          bundler-cache: true
 
-      - name: 📤 Upload site artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: 📦 Installer les dépendances
+        run: bundle install
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+      - name: 🏗️ Générer le site Jekyll
+        run: bundle exec jekyll build
+
+      - name: 🚀 Déployer sur GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: _site
+
+      - name: 📤 Publier sur GitHub Pages
+        uses: actions/deploy-pages@v2
 
