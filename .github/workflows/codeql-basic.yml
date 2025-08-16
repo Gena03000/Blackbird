@@ -22,6 +22,13 @@ jobs:
         with:
           hugo-version: '0.148.2'
 
+      - name: 🧪 Vérifier la présence du fichier de config
+        run: |
+          if [ ! -f config.toml ] && [ ! -f config.yaml ] && [ ! -f config.json ]; then
+            echo "❌ Aucun fichier de configuration Hugo trouvé."
+            exit 1
+          fi
+
       - name: 🏗️ Générer le site Hugo
         run: hugo --minify
 
@@ -32,6 +39,7 @@ jobs:
 
       - name: 🚀 Déployer sur GitHub Pages
         uses: actions/deploy-pages@v2
+
 
 
 
