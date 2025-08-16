@@ -1,0 +1,13 @@
+name: Utiliser mon action personnalisée
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./actions/download-artifact
+        with:
+          name: mon-artifact
