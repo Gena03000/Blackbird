@@ -1,38 +1,48 @@
-name: CodeQL Basique
+name: Déployer Jekyll sur GitHub Pages
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '0 0 * * 0'  # Analyse hebdomadaire
 
 permissions:
-  actions: read
   contents: read
-  security-events: write
+  pages: write
+  id-token: write
 
 jobs:
-  analyze:
-    name: Analyse CodeQL
+  build-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: 🧪 Initialiser CodeQL
-        uses: github/codeql-action/init@v3
+      - name: 🧱 Configuration Ruby et Jekyll
+        uses: ruby/setup-ruby@v1
         with:
-          languages: javascript
+          ruby-version: '3.1'
+          bundler-cache: true
 
-      - name: 🧠 Effectuer une analyse CodeQL
-        uses: github/codeql-action/analyze@v3
+      - name: 📦 Installer les dépendances
+        run: bundle install
 
-      - name: 📤 Télécharger les résultats SARIF
-        uses: github/codeql-action/upload-sarif@v3
+      - name: 🏗️ Générer le site Jekyll
+        run: bundle exec jekyll build
+
+      - name: 📤 Sauvegarder les artefacts du site
+        uses: actions/upload-artifact@v4
         with:
-          sarif_file: .github/codeql-results/javascript.sarif
+          name: site-jekyll
+          path: _site
+
+      - name: 📤 Préparer les artefacts pour GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: _site
+
+      - name: 🚀 Déployer sur GitHub Pages
+        uses: actions/deploy-pages@v2
+
 
 
 
