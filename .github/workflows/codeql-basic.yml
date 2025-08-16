@@ -17,31 +17,22 @@ jobs:
       - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: 🧱 Configuration Ruby et Jekyll
-        uses: ruby/setup-ruby@v1
+      - name: 🛠️ Installer Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          ruby-version: '3.1'
-          bundler-cache: true
+          hugo-version: '0.148.2'
 
-      - name: 📦 Installer les dépendances
-        run: bundle install
-
-      - name: 🏗️ Générer le site Jekyll
-        run: bundle exec jekyll build
-
-      - name: 📤 Sauvegarder les artefacts du site
-        uses: actions/upload-artifact@v4
-        with:
-          name: site-jekyll
-          path: _site
+      - name: 🏗️ Générer le site Hugo
+        run: hugo --minify
 
       - name: 📤 Préparer les artefacts pour GitHub Pages
         uses: actions/upload-pages-artifact@v2
         with:
-          path: _site
+          path: ./public
 
       - name: 🚀 Déployer sur GitHub Pages
         uses: actions/deploy-pages@v2
+
 
 
 
