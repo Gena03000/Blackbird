@@ -1,4 +1,4 @@
-name: "CodeQL Advanced"
+name: "CodeQL + Deploy Railway"
 
 on:
   push:
@@ -7,28 +7,32 @@ on:
     branches: [ main ]
 
 jobs:
-  analyze:
+  analyze-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }} # Authentification Railway
+
     steps:
-      # 1. Récupère le code
+      # 1️⃣ Récupération du code + sous-modules
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      # 2. Connexion Railway via token secret
-      - name: Login to Railway
-        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
-
-      # 3. Configurer CodeQL
+      # 2️⃣ Initialisation CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
-      # 4. Exécuter CodeQL Analyse
+      # 3️⃣ Analyse CodeQL
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+
+      # 4️⃣ Déploiement Railway (sans login interactif)
+      - name: Deploy to Railway
+        run: railway up --service=nom-du-service
+
 
 
