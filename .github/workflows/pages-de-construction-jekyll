@@ -1,6 +1,8 @@
-name: 'Build Jekyll for GitHub Pages'
-description: 'A simple GitHub Action for producing Jekyll build artifacts compatible with GitHub Pages'
-author: 'GitHub'
+- name: Upload build output
+  uses: actions/upload-artifact@v4
+  with:
+    name: build
+    path: _site/
 inputs:
   source:
     description: 'Directory where the source files reside.'
