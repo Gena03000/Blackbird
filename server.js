@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+PORT = 4000
 const port = process.env.PORT || 4000;
 const displayUrl = process.env.PORT
   ? 'https://merle.up.railway.app'
