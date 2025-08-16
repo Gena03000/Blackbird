@@ -28,11 +28,12 @@ jobs:
       - name: 🏗️ Générer le site Jekyll
         run: bundle exec jekyll build
 
-      - name: 🚀 Déployer sur GitHub Pages
+      - name: 📤 Préparer les artefacts pour GitHub Pages
         uses: actions/upload-pages-artifact@v2
         with:
           path: _site
 
-      - name: 📤 Publier sur GitHub Pages
+      - name: 🚀 Déployer sur GitHub Pages
         uses: actions/deploy-pages@v2
+
 
