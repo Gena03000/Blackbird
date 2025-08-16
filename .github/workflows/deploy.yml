@@ -1,13 +1,9 @@
-- name: Deploy to Railway
-  run: railway up
-  env:
-    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
+name: Déploiement sur Railway
 
 on:
   push:
     branches:
-      - main  # ou 'principal' si c'est bien le nom de ta branche
+      - main  # ou 'principal' si c'est le nom réel de ta branche
 
 permissions:
   contents: read
@@ -20,28 +16,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Checkout code
+      - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: 🧰 Set up Node.js
+      - name: 🧰 Installer Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: 🛠️ Install Railway CLI
+      - name: 🛠️ Installer Railway CLI
         run: npm install -g @railway/cli
 
-      - name: 🔐 Login to Railway
-        run: echo "${{ secrets.RAILWAY_TOKEN }}" | railway login
-
-      - name: 🔗 Link to Railway project
+      - name: 🔗 Lier le projet Railway
         run: railway link d9168a4f-9d6e-482b-b876-f2bbd343fa9c
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 🚀 Deploy to Railway
+      - name: 🚀 Déployer sur Railway
         run: railway up
-
-
-
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
 
 
