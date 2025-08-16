@@ -1,9 +1,0 @@
-name: 'Télécharger un artefact'
-description: 'Action personnalisée pour télécharger un artefact'
-inputs:
-  name:
-    description: 'Nom de l’artefact à télécharger'
-    required: true
-runs:
-  using: 'node20'
-  main: 'dist/index.js'
