@@ -3,6 +3,11 @@ const express = require('express');
 const app = express();
 
 const PORT = parseInt(process.env.PORT, 10) || 4000;
+app.post('/shopify', (req, res) => {
+  console.log('📦 Webhook GitHub reçu !');
+  console.log('Payload :', req.body);
+  res.status(200).send('✅ Webhook reçu par Blackbird');
+});
 
 app.use(express.json());
 
