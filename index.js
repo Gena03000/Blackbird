@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
 const PORT = parseInt(process.env.PORT, 10) || 4000;
 app.post('/shopify', (req, res) => {
   console.log('📦 Webhook GitHub reçu !');
@@ -10,7 +9,7 @@ app.post('/shopify', (req, res) => {
 });
 
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('✅ Blackbird est en ligne sur Railway !');
 });
