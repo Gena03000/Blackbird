@@ -1,5 +1,4 @@
-- name: 🚀 Deploy to Railway
-
+name: 🚀 Deploy to Railway
 
 on:
   push:
@@ -11,13 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🔧 Définir le PORT par défaut
-        run: |
-          echo "PORT=${PORT:-4000}" >> $GITHUB_ENV
-
-
-
-
-
+        run: echo "PORT=${PORT:-4000}" >> $GITHUB_ENV
 
       - name: ✅ Check Railway token presence
         run: |
@@ -56,7 +49,7 @@ jobs:
       - name: 🧪 Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: python
+          languages: javascript
 
       - name: 🧠 Perform CodeQL analysis
         uses: github/codeql-action/analyze@v3
@@ -64,7 +57,8 @@ jobs:
       - name: 📤 Upload SARIF results
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: blackbird-python-results.sarif
+          sarif_file: results.sarif
+
 
 
 
