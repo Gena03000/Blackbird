@@ -29,7 +29,7 @@ jobs:
         run: bundle exec jekyll build
 
       - name: 📤 Préparer les artefacts pour GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
 
