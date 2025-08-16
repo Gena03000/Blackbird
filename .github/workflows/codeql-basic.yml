@@ -1,38 +1,39 @@
-name: 🔍 CodeQL Basic
+name: CodeQL Basique
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 0'  # Analyse hebdomadaire
+
 permissions:
   actions: read
   contents: read
   security-events: write
 
-on:
-  push:
-    branches: [main]
-
 jobs:
   analyze:
+    name: Analyse CodeQL
     runs-on: ubuntu-latest
-
-    env:
-      SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
-      SHOPIFY_API_SECRET: ${{ secrets.SHOPIFY_API_SECRET }}
-      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
     steps:
-      - name: 📦 Checkout repository
+      - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: 🧪 Initialize CodeQL
+      - name: 🧪 Initialiser CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript  # ou typescript si ton code est en TS
+          languages: javascript
 
-      - name: 🧠 Perform CodeQL analysis
+      - name: 🧠 Effectuer une analyse CodeQL
         uses: github/codeql-action/analyze@v3
 
-      - name: 📤 Upload SARIF results
+      - name: 📤 Télécharger les résultats SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: results.sarif
+          sarif_file: .github/codeql-results/javascript.sarif
+
 
 
 
