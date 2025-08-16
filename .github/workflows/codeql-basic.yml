@@ -17,6 +17,12 @@ jobs:
       - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
+      - name: ⚡ Cache Hugo resources
+        uses: actions/cache@v3
+        with:
+          path: resources
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/*') }}
+
       - name: 🛠️ Installer Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -30,7 +36,9 @@ jobs:
           fi
 
       - name: 🏗️ Générer le site Hugo
-        run: hugo --minify
+        env:
+          HUGO_ENV: production
+        run: hugo --minify --enableGitInfo
 
       - name: 📤 Préparer les artefacts pour GitHub Pages
         uses: actions/upload-pages-artifact@v2
