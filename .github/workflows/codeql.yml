@@ -1,4 +1,5 @@
-- name: 🚀 Deploy to Railway
+name  : «  CodeQL Advanced  »
+
   run: railway up --service=nom-du-service --token $RAILWAY_TOKEN
 
 
