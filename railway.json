@@ -3,7 +3,7 @@
   "rootDirectory": ".",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "startCommand": "node index.js",
+  "startCommand": "node build/index.js"
   "build": {
     "builder": "NIXPACKS",
     "buildCommand": "npm run build"
@@ -11,7 +11,11 @@
   "deploy": {
     "runtime": "V2",
     "numReplicas": 1,
-    "startCommand": "node index.js",
+    "deploy": {
+  ...
+  "startCommand": "node build/index.js",
+  ...
+}
     "sleepApplication": false,
     "multiRegionConfig": {
       "europe-west4-drams3a": {
