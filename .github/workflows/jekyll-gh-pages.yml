@@ -12,9 +12,13 @@ jobs:
     steps:
       - name: 📥 Checkout du dépôt
         uses: actions/checkout@v4
-
       - name: 🔧 Configuration Ruby
-       - uses: ruby/setup-ruby@v1
+  uses: ruby/setup-ruby@v1
+  with:
+    ruby-version: '3.2'
+    bundler-cache: true
+
+     
   with:
     ruby-version: '3.2'
     bundler-cache: true
