@@ -1,11 +1,7 @@
 {
   "name": "@jasontanswe/railway-mcp",
   "version": "1.3.0",
-  const port = process.env.PORT || 4000;
-
-app.listen(port, () => {
-  console.log(`🧶 Serveur textile actif sur http://localhost:${port}`);
-});
+  const port = process.env.PORT || 4000
 
   "main": "build/index.js",
   "type": "module",
