@@ -1,4 +1,4 @@
-name: Déployer Jekyll sur GitHub Pages
+name: Déployer Hugo sur GitHub Pages
 
 on:
   push:
