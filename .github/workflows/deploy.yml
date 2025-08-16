@@ -1,4 +1,8 @@
-name: 🚀 Deploy to Railway
+- name: Deploy to Railway
+  run: railway up
+  env:
+    RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
 
 on:
   push:
