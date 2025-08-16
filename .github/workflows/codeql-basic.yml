@@ -1,52 +1,24 @@
-name: Déployer Hugo sur GitHub Pages
+name: Déploiement sur Railway
 
 on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: 📦 Checkout du dépôt
         uses: actions/checkout@v4
 
-      - name: ⚡ Cache Hugo resources
-        uses: actions/cache@v3
-        with:
-          path: resources
-          key: ${{ runner.os }}-hugo-${{ hashFiles('**/*') }}
-
-      - name: 🛠️ Installer Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.148.2'
-
-      - name: 🧪 Vérifier la présence du fichier de config
+      - name: 🚀 Déployer sur Railway
         run: |
-          if [ ! -f config.toml ] && [ ! -f config.yaml ] && [ ! -f config.json ]; then
-            echo "❌ Aucun fichier de configuration Hugo trouvé."
-            exit 1
-          fi
-
-      - name: 🏗️ Générer le site Hugo
+          npm install -g railway
+          railway up --yes
         env:
-          HUGO_ENV: production
-        run: hugo --minify --enableGitInfo
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 📤 Préparer les artefacts pour GitHub Pages
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./public
-
-      - name: 🚀 Déployer sur GitHub Pages
-        uses: actions/deploy-pages@v2
 
 
 
