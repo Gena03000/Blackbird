@@ -2,8 +2,12 @@ name: Déployer Hugo sur GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-deploy:
@@ -17,13 +21,15 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.148.2'
-          extended: true
 
-      - name: 🏗️ Build du site Hugo
+      - name: 🏗️ Générer le site Hugo
         run: hugo --minify
 
-      - name: 🚀 Déploiement sur GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: 📤 Préparer les artefacts pour GitHub Pages
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public
+
+      - name: 🚀 Déployer sur GitHub Pages
+        uses: actions/deploy-pages@v2
+
