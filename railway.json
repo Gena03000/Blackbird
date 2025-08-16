@@ -1,29 +1,24 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
-
-  // ----------- CONFIGURATION BUILD -----------
   "build": {
-    "builder": "NIXPACKS",             // Utilise Nixpacks (sans Dockerfile)
-    "buildCommand": "npm ci && npm run build" // npm ci = install propre pour CI/CD
+    "builder": "NIXPACKS",
+    "buildCommand": "npm ci && npm run build"
   },
-
-  // ----------- CONFIGURATION DEPLOIEMENT -----------
   "deploy": {
     "runtime": "V2",
-    "numReplicas": 1,                  // Nombre d'instances par défaut
-    "startCommand": "node index.js",   // Commande de démarrage
-    "sleepApplication": false,         // Ne jamais mettre en veille
-    "autoDeploy": true,                 // Déploiement auto à chaque push
-    "healthCheckPath": "/",             // Chemin utilisé par Railway pour vérifier la santé
-    "restartPolicyType": "ON_FAILURE",  // Redémarre uniquement si erreur
-    "restartPolicyMaxRetries": 10,      // Nombre max de tentatives de restart
-
-    // Multi-régions pour résilience
+    "numReplicas": 1,
+    "startCommand": "node index.js",
+    "sleepApplication": false,
+    "autoDeploy": true,
+    "healthCheckPath": "/",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10,
     "multiRegionConfig": {
       "europe-west4-drams3a": { "numReplicas": 1 },
       "us-central1-x9ksa2": { "numReplicas": 1 }
     }
   }
 }
+
 
 
